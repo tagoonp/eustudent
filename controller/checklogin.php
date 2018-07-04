@@ -1,7 +1,9 @@
 <?php
 include "config.class.php";
 include "database.fnc.php";
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 if(!isset($_POST['email'])){
   disconnect($conn);
@@ -12,6 +14,7 @@ if(!isset($_POST['password'])){
   disconnect($conn);
   die();
 }
+
 
 $password = mysqli_real_escape_string($conn, base64_encode($_POST['password']));
 $email = mysqli_real_escape_string($conn, $_POST['email']);
@@ -32,6 +35,8 @@ $result = select($conn, $strSQL);
 
 if($result){
   echo json_encode($result);
+}else{
+  echo $strSQL;
 }
 
 disconnect($conn);

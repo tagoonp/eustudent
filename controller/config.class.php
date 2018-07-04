@@ -2,10 +2,11 @@
 header("Access-Control-Allow-Origin: *");
 date_default_timezone_set("Asia/Bangkok");
 
+// die();
 
 $host = 'localhost';
 $user = 'root';
-$password = 'mandymorenn';
+$password = 'na20v^U+';
 $dbname = 'eusis';
 $dbprefix = 'eusis_';
 
