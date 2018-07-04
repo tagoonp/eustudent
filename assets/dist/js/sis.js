@@ -149,15 +149,34 @@ var sis = {
                })
   },
   load_student: function(){
-    var jxr = $.post(ws_url + 'get-student.php', function(){}, 'json')
+
+    console.log(start_row);
+
+    if(start_row == 0){
+      $('.ppage').attr('disabled', 'disabled')
+    }else{
+      $('.ppage').attr('disabled', false)
+    }
+
+    var param = {
+      start: start_row,
+      lpp: limit_per_page,
+      dg: $('#txtDegreeFillter').val(),
+      id: $('#txtStudentIDFillter').val(),
+      st: $('#txtStatusFillter').val(),
+      key: $('#txtNameFillter').val()
+    }
+
+    console.log(param);
+    var jxr = $.post(ws_url + 'get-student.php', param, function(){}, 'json')
                .always(function(snap){
+
+                 $('.table_response').empty()
 
                  if(fnc.checksnap(snap)){
                    $msc = 0
                    $phd = 0
                    $sc = 0
-
-                   $('.table_response').empty()
                    snap.forEach(function(i){
 
                      $status_a = '<span class="text-success">Active</span>'
@@ -175,12 +194,12 @@ var sis = {
                                 '<td>' + i.s_student_id + '</td>' +
                                 '<td>' + i.prefix_name + i.fname + ' ' + i.lname +
                                   '<div class="pt-5">' +
-                                    '<button class="btn btn-light btn-icon-anim btn-square btn-sm mr-5 mb-5" data-toggle="tooltip" data-placement="top" title="View info" onclick="sis.manage_page_student(\'' + i.uid + '\',\'student-information.html\')"><i class="fas fa-search"></i></button>' +
-                                    '<button class="btn btn-light btn-icon-anim btn-square btn-sm mr-5 mb-5" data-toggle="tooltip" data-placement="top" title="Edit info"><i class="fas fa-pencil-alt"></i></button>' +
-                                    '<button class="btn btn-light btn-icon-anim btn-square btn-sm mr-5 mb-5" data-toggle="tooltip" data-placement="top" title="Manage"><i class="fas fa-cogs"></i></button>' +
-                                    '<button class="btn btn-light btn-icon-anim btn-square btn-sm mr-5 mb-5" data-toggle="tooltip" data-placement="top" title="Send e-mail"><i class="far fa-comment"></i></button>' +
-                                    '<button class="btn btn-light btn-icon-anim btn-square btn-sm mr-5 mb-5" data-toggle="tooltip" data-placement="top" title="Send message"><i class="fas fa-envelope"></i></button>' +
-                                    '<button class="btn btn-danger btn-icon-anim btn-square btn-sm mr-5" data-toggle="tooltip" data-placement="top" title="Delete" onclick="sis.delete_student(\'' + i.uid + '\',\'' + i.s_student_id + '\')"><i class="fas fa-trash"></i></button>' +
+                                    '<button class="btn btn-secondary btn-icon-anim btn-square btn-sm mr-5 mb-5" data-toggle="tooltip" data-placement="top" title="View info" onclick="sis.manage_page_student(\'' + i.uid + '\',\'student-information.html\')"><i class="fas fa-search"></i></button>' +
+                                    '<button class="btn btn-secondary btn-icon-anim btn-square btn-sm mr-5 mb-5" data-toggle="tooltip" data-placement="top" title="Edit info"><i class="fas fa-pencil-alt"></i></button>' +
+                                    '<button class="btn btn-secondary btn-icon-anim btn-square btn-sm mr-5 mb-5" data-toggle="tooltip" data-placement="top" title="Manage"><i class="fas fa-cogs"></i></button>' +
+                                    '<button class="btn btn-secondary btn-icon-anim btn-square btn-sm mr-5 mb-5" data-toggle="tooltip" data-placement="top" title="Send message" disabled><i class="far fa-comment"></i></button>' +
+                                    '<button class="btn btn-secondary btn-icon-anim btn-square btn-sm mr-5 mb-5" data-toggle="tooltip" data-placement="top" title="Send e-mail" disabled><i class="fas fa-envelope"></i></button>' +
+                                    '<button class="btn btn-danger btn-icon-anim btn-square btn-sm mr-5 mb-5" data-toggle="tooltip" data-placement="top" title="Delete" onclick="sis.delete_student(\'' + i.uid + '\',\'' + i.s_student_id + '\')"><i class="fas fa-trash"></i></button>' +
                                   '</div>' +
                                 '</td>' +
                                 '<td>' + i.degree_name + '</td>' +
@@ -190,11 +209,15 @@ var sis = {
                              '</tr>'
                      $('.table_response').append($data)
                    })
+
                    $('[data-toggle="tooltip"]').tooltip()
 
                    $('.numMSC').text($msc)
                    $('.numPHD').text($phd)
                    $('.numSC').text($sc)
+                 }else{
+                   $data = '<tr><td colspan="5">No student found</td></tr>'
+                   $('.table_response').append($data)
                  }
                })
   },
@@ -224,7 +247,7 @@ var sis = {
                      $data = '<tr>' +
                                 '<td>' + i.prefix_name + i.fname + ' ' + i.lname +
                                   '<div class="pt-5">' +
-                                    '<button class="btn btn-light btn-icon-anim btn-square btn-sm mr-5" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-pencil-alt"></i></button>' +
+                                    '<button class="btn btn-light btn-icon-anim btn-square btn-sm mr-5" data-toggle="tooltip" data-placement="top" title="Edit" onclick="updateStaff(\'' + i.uid + '\')"><i class="fas fa-pencil-alt"></i></button>' +
                                     '<button class="btn btn-light btn-icon-anim btn-square btn-sm mr-5" data-toggle="tooltip" data-placement="top" title="Manage"><i class="fas fa-cogs"></i></button>' +
                                     '<button class="btn btn-danger btn-icon-anim btn-square btn-sm mr-5" data-toggle="tooltip" data-placement="top" title="Delete" onclick="project.delete_project(\'' + i.uid + '\')"><i class="fas fa-trash"></i></button>' +
                                   '</div>' +
@@ -247,61 +270,109 @@ var sis = {
     var jxr = $.post(ws_url + 'get-prefix.php', function(){}, 'json')
                .always(function(snap){
                  if(fnc.checksnap(snap)){
-                   $('#txtPrefix').empty()
-                   $('#txtPrefix').append('<option value="">-- Choose name prefix --</option>')
+                   $('.prefix').empty()
+                   $('.prefix').append('<option value="">-- Choose name prefix --</option>')
                    snap.forEach(function(i){
                      $data = '<option value="' + i.prefix_id + '">' + i.prefix_name + '</option>'
-                     $('#txtPrefix').append($data)
+                     $('.prefix').append($data)
                    })
                  }
                })
   },
-  create_staff: function(){
+  create_staff: function(stage){
+
+
     var check = 0;
     $('.form-control').removeClass('is-invalid')
     $('.invalid-feedback').remove()
 
-    if($('#txtPrefix').val() == ''){
-      check++
-      $('#txtPrefix').addClass('is-invalid')
-      $('#txtPrefix').parent().append('<div class="invalid-feedback text-right">Please choose preifx</div>')
+    if(stage == null){
+      if($('#txtPrefix').val() == ''){
+        check++
+        $('#txtPrefix').addClass('is-invalid')
+        $('#txtPrefix').parent().append('<div class="invalid-feedback text-right">Please choose preifx</div>')
+      }
+
+      if($('#txtFname').val() == ''){
+        check++
+        $('#txtFname').addClass('is-invalid')
+        $('#txtFname').parent().append('<div class="invalid-feedback text-right">Please enter firstname</div>')
+      }
+
+      if($('#txtLname').val() == ''){
+        check++
+        $('#txtLname').addClass('is-invalid')
+        $('#txtLname').parent().append('<div class="invalid-feedback text-right">Please enter surname</div>')
+      }
+
+      if($('#txtRole').val() == ''){
+        check++
+        $('#txtRole').addClass('is-invalid')
+        $('#txtRole').parent().append('<div class="invalid-feedback text-right">Please choose role</div>')
+      }
+
+      if($('#txtEmail').val() == ''){
+        check++
+        $('#txtEmail').addClass('is-invalid')
+        $('#txtEmail').parent().append('<div class="invalid-feedback text-right">Please enter e-mail address</div>')
+      }
+
+      if($('#txtPhone').val() == ''){
+        check++
+        $('#txtPhone').addClass('is-invalid')
+        $('#txtPhone').parent().append('<div class="invalid-feedback text-right">Please enter phone number</div>')
+      }
+
+      if(!isEmail($('#txtEmail').val())){
+        check++
+        $('#txtEmail').addClass('is-invalid')
+        $('#txtEmail').parent().append('<div class="invalid-feedback text-right">Invalid e-mail pattern</div>')
+      }
+    }else{
+      if($('#txtPrefix2').val() == ''){
+        check++
+        $('#txtPrefix2').addClass('is-invalid')
+        $('#txtPrefix2').parent().append('<div class="invalid-feedback text-right">Please choose preifx</div>')
+      }
+
+      if($('#txtFname2').val() == ''){
+        check++
+        $('#txtFname2').addClass('is-invalid')
+        $('#txtFname2').parent().append('<div class="invalid-feedback text-right">Please enter firstname</div>')
+      }
+
+      if($('#txtLname2').val() == ''){
+        check++
+        $('#txtLname2').addClass('is-invalid')
+        $('#txtLname2').parent().append('<div class="invalid-feedback text-right">Please enter surname</div>')
+      }
+
+      if($('#txtRole2').val() == ''){
+        check++
+        $('#txtRole2').addClass('is-invalid')
+        $('#txtRole2').parent().append('<div class="invalid-feedback text-right">Please choose role</div>')
+      }
+
+      if($('#txtEmail2').val() == ''){
+        check++
+        $('#txtEmail2').addClass('is-invalid')
+        $('#txtEmail2').parent().append('<div class="invalid-feedback text-right">Please enter e-mail address</div>')
+      }
+
+      if($('#txtPhone2').val() == ''){
+        check++
+        $('#txtPhone2').addClass('is-invalid')
+        $('#txtPhone2').parent().append('<div class="invalid-feedback text-right">Please enter phone number</div>')
+      }
+
+      if(!isEmail($('#txtEmail2').val())){
+        check++
+        $('#txtEmail2').addClass('is-invalid')
+        $('#txtEmail2').parent().append('<div class="invalid-feedback text-right">Invalid e-mail pattern</div>')
+      }
     }
 
-    if($('#txtFname').val() == ''){
-      check++
-      $('#txtFname').addClass('is-invalid')
-      $('#txtFname').parent().append('<div class="invalid-feedback text-right">Please enter firstname</div>')
-    }
 
-    if($('#txtLname').val() == ''){
-      check++
-      $('#txtLname').addClass('is-invalid')
-      $('#txtLname').parent().append('<div class="invalid-feedback text-right">Please enter surname</div>')
-    }
-
-    if($('#txtRole').val() == ''){
-      check++
-      $('#txtRole').addClass('is-invalid')
-      $('#txtRole').parent().append('<div class="invalid-feedback text-right">Please choose role</div>')
-    }
-
-    if($('#txtEmail').val() == ''){
-      check++
-      $('#txtEmail').addClass('is-invalid')
-      $('#txtEmail').parent().append('<div class="invalid-feedback text-right">Please enter e-mail address</div>')
-    }
-
-    if($('#txtPhone').val() == ''){
-      check++
-      $('#txtPhone').addClass('is-invalid')
-      $('#txtPhone').parent().append('<div class="invalid-feedback text-right">Please enter phone number</div>')
-    }
-
-    if(!isEmail($('#txtEmail').val())){
-      check++
-      $('#txtEmail').addClass('is-invalid')
-      $('#txtEmail').parent().append('<div class="invalid-feedback text-right">Invalid e-mail pattern</div>')
-    }
 
     if(check != 0){
       return false;
@@ -321,6 +392,22 @@ var sis = {
       uid: current_user
     }
 
+    if(stage == '1'){
+      param = {
+        cuid: $('#txtUID').val(),
+        prefix: $('#txtPrefix2').val(),
+        fname: $('#txtFname2').val(),
+        lname: $('#txtLname2').val(),
+        email: $('#txtEmail2').val(),
+        phone: $('#txtPhone2').val(),
+        role: $('#txtRole2').val(),
+        exp: $('#txtExp2').val(),
+        interest: $('#txtInterest2').val(),
+        uid: current_user
+      }
+    }
+
+    console.log(param);
     var jxr = $.post(ws_url + 'register_staff.php', param, function(){})
                .always(function(snap){
                  console.log(snap);
@@ -342,4 +429,38 @@ var sis = {
                  preload.hide()
                })
   }
+}
+
+
+function updateStaff(id){
+
+  preload.show()
+
+  $('#txtUID').val(id)
+  $('#updatestaffbtn').trigger('click')
+
+  var param = {
+    uid: id
+  }
+
+  var jxr = $.post(ws_url + 'get-staff-info.php', param, function(){}, 'json')
+             .always(function(snap){
+               if(fnc.checksnap(snap)){
+                 console.log(snap);
+                 snap.forEach(function(i){
+                  $('#txtPrefix2').val(i.prefix)
+                  $('#txtFname2').val(i.fname)
+                  $('#txtLname2').val(i.lname)
+                  $('#txtEmail2').val(i.email)
+                  $('#txtPhone2').val(i.phone)
+                  $('#txtRole2').val(i.role)
+                  $('#txtExp2').val(i.expertise)
+                  $('#txtInterest2').val(i.interest)
+                 })
+                 preload.hide()
+               }else{
+                 alert('Fail')
+                 preload.hide()
+               }
+             })
 }
