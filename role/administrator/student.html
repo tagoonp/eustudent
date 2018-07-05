@@ -413,36 +413,43 @@
       $(document).ready(function(){
         sis.load_prefix()
         sis.load_student()
+        sis.load_all_student()
       })
       $(function(){
         $('.npage').click(function(){
           start_row += limit_per_page
           sis.load_student()
+          sis.load_all_student()
         })
 
         $('.ppage').click(function(){
           start_row -= limit_per_page
           sis.load_student()
+          sis.load_all_student()
         })
 
         $('#txtDegreeFillter').change(function(){
           start_row = 0
           sis.load_student()
+          sis.load_all_student()
         })
 
         $('#txtStudentIDFillter').keyup(function(){
           start_row = 0
           sis.load_student()
+          sis.load_all_student()
         })
 
         $('#txtNameFillter').keyup(function(){
           start_row = 0
           sis.load_student()
+          sis.load_all_student()
         })
 
         $('#txtStatusFillter').change(function(){
           start_row = 0
           sis.load_student()
+          sis.load_all_student()
         })
       })
     </script>

@@ -129,6 +129,83 @@ var sis = {
                  preload.hide()
                })
   },
+  update_student_1: function(){
+    var check = 0;
+    $('.form-control').removeClass('is-invalid')
+    $('.invalid-feedback').remove()
+
+    if($('#txtStudentID').val() == ''){
+      check++
+      $('#txtStudentID').addClass('is-invalid')
+      $('#txtStudentID').parent().append('<div class="invalid-feedback text-right">Please enter student ID</div>')
+    }
+
+    if($('#txtPrefix').val() == ''){
+      check++
+      $('#txtPrefix').addClass('is-invalid')
+      $('#txtPrefix').parent().append('<div class="invalid-feedback text-right">Please choose preifx</div>')
+    }
+
+    if($('#txtFname').val() == ''){
+      check++
+      $('#txtFname').addClass('is-invalid')
+      $('#txtFname').parent().append('<div class="invalid-feedback text-right">Please enter firstname</div>')
+    }
+
+    if($('#txtLname').val() == ''){
+      check++
+      $('#txtLname').addClass('is-invalid')
+      $('#txtLname').parent().append('<div class="invalid-feedback text-right">Please enter surname</div>')
+    }
+
+    if($('#txtDegree').val() == ''){
+      check++
+      $('#txtDegree').addClass('is-invalid')
+      $('#txtDegree').parent().append('<div class="invalid-feedback text-right">Please choose degree</div>')
+    }
+
+    if($('#txtStartyear').val() == ''){
+      check++
+      $('#txtStartyear').addClass('is-invalid')
+      $('#txtStartyear').parent().append('<div class="invalid-feedback text-right">Please enter start year</div>')
+    }
+
+    if(check != 0){
+      return false;
+    }
+
+    preload.show()
+
+    var param = {
+      student_uid: current_student,
+      studentid: $('#txtStudentID').val(),
+      prefix: $('#txtPrefix').val(),
+      fname: $('#txtFname').val(),
+      lname: $('#txtLname').val(),
+      phone: $('#txtPhone').val(),
+      degree: $('#txtDegree').val(),
+      startyear: $('#txtStartyear').val(),
+      uid: current_user
+    }
+
+    var jxr = $.post(ws_url + 'update-student-info-1.php', param, function(){})
+               .always(function(resp){
+                 if(resp == 'Y'){
+                   $('.btnCloseModal').trigger('click')
+                   preload.hide()
+                   alert('Update success')
+                   sis.load_student_info()
+                 }else{
+                   preload.hide()
+                   alert('Update fail')
+                 }
+               })
+               .fail(function(){
+                 preload.hide()
+                 alert('Can not connect database')
+               })
+
+  },
   load_student_info: function(){
     var param = {
       student_uid: current_student
@@ -137,6 +214,7 @@ var sis = {
     var jxr = $.post(ws_url + 'get-student-info.php', param, function(){}, 'json')
                .always(function(snap){
                  if(fnc.checksnap(snap)){
+
                    snap.forEach(function(i){
                      $('.txt_student_id').text(i.s_student_id)
                      $('.txt_student_fullname').text(i.prefix_name + ' ' + i.fname + ' ' + i.lname)
@@ -144,20 +222,55 @@ var sis = {
                      $('.txt_student_start_year').text(i.s_start_year)
                      $('.txt_student_status').text(i.s_status)
                      $('.txt_student_email').text(i.email)
+
+                     $('#txtStudentID').val(i.s_student_id)
+                     $('#txtStartyear').val(i.s_start_year)
+                     $('#txtPrefix').val(i.prefix_id)
+                     $('#txtDegree').val(i.degree_id)
+                     $('#txtFname').val(i.fname)
+                     $('#txtLname').val(i.lname)
+
                    })
                  }
                })
   },
+  load_all_student: function(){
+    var param = {
+      dg: $('#txtDegreeFillter').val(),
+      id: $('#txtStudentIDFillter').val(),
+      st: $('#txtStatusFillter').val(),
+      key: $('#txtNameFillter').val()
+    }
+
+    var jxr = $.post(ws_url + 'get-count-student.php', param, function(){}, 'json')
+               .always(function(snap){
+                 if(fnc.checksnap(snap)){
+                   $msc = 0
+                   $phd = 0
+                   $sc = 0
+
+                   snap.forEach(function(i){
+                     if(i.s_degree == 'msc'){
+                       $msc++;
+                     }else if(i.s_degree == 'phd'){
+                       $phd++;
+                     }else if(i.s_degree == 'sc'){
+                       $sc++;
+                     }
+                   })
+
+                   $('.numMSC').text($msc)
+                   $('.numPHD').text($phd)
+                   $('.numSC').text($sc)
+                 }
+               })
+  },
   load_student: function(){
-
-    console.log(start_row);
-
     if(start_row == 0){
       $('.ppage').attr('disabled', 'disabled')
     }else{
       $('.ppage').attr('disabled', false)
     }
-
     var param = {
       start: start_row,
       lpp: limit_per_page,
@@ -166,29 +279,16 @@ var sis = {
       st: $('#txtStatusFillter').val(),
       key: $('#txtNameFillter').val()
     }
-
-    console.log(param);
     var jxr = $.post(ws_url + 'get-student.php', param, function(){}, 'json')
                .always(function(snap){
 
                  $('.table_response').empty()
 
                  if(fnc.checksnap(snap)){
-                   $msc = 0
-                   $phd = 0
-                   $sc = 0
                    snap.forEach(function(i){
 
                      $status_a = '<span class="text-success">Active</span>'
                      $status_b = '<span class="text-success">Allow</span>'
-
-                     if(i.s_degree == 'msc'){
-                       $msc++;
-                     }else if(i.s_degree == 'phd'){
-                       $phd++;
-                     }else if(i.s_degree == 'sc'){
-                       $sc++;
-                     }
 
                      $data = '<tr>' +
                                 '<td>' + i.s_student_id + '</td>' +
@@ -211,10 +311,6 @@ var sis = {
                    })
 
                    $('[data-toggle="tooltip"]').tooltip()
-
-                   $('.numMSC').text($msc)
-                   $('.numPHD').text($phd)
-                   $('.numSC').text($sc)
                  }else{
                    $data = '<tr><td colspan="5">No student found</td></tr>'
                    $('.table_response').append($data)

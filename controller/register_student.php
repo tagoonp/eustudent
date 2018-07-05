@@ -70,8 +70,8 @@ $result = insert($conn, $strSQL, false);
 if($result){
 
 
-  $strSQL = "INSERT INTO $tb2 (prefix, fname, lname, expertise, interest, info_uid)
-             VALUES ('$prefix', '$fname', '$lname', '', '', '$new_uid')
+  $strSQL = "INSERT INTO $tb2 (prefix, fname, lname, phone, expertise, interest, info_uid)
+             VALUES ('$prefix', '$fname', '$lname', '$phone', '', '', '$new_uid')
             ";
   $result = insert($conn, $strSQL, false);
 

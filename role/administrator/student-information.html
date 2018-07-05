@@ -128,7 +128,83 @@
                 Basic information
               </div>
               <div class="col font-bold text-right">
-                <button class="btn btn-light btn-square" data-toggle="tooltip" data-placement="top" title="Update"><i class="fas fa-pencil-alt"></i></button>
+                <!-- sample modal content -->
+                <div class="modal fade bs-example-modal-lg-info-1 text-left" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Update information</h5>
+                        <button type="button" class="close txt-light btnCloseModal" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body fz09" style="background: rgb(250, 250, 250);">
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <span class="text-danger">** Please enter all required field.</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-body fz09">
+                        <form onsubmit="return false;" id="register-staff-form">
+                          <div class="row">
+                            <div class="col-sm-4">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label font-bold fz08">Student ID <span class="text-danger">**</span></label>
+                                <input type="text" class="form-control" id="txtStudentID" placeholder="Enter student id ..." >
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label font-bold fz08">Start year <span class="text-danger">**</span></label>
+                                <input type="number" class="form-control" id="txtStartyear" placeholder="Enter start year ex. 2018" >
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="form-group">
+                                <label for="message-text" class="col-form-label font-bold fz08">Degree  <span class="text-danger">**</span></label>
+                                <select name="" id="txtDegree" class="form-control">
+                                  <option value="">-- Choose degree --</option>
+                                  <option value="msc">M.Sc.</option>
+                                  <option value="phd">Ph.D.</option>
+                                  <option value="sc">Short-course</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-4">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label font-bold fz08">Prefix <span class="text-danger">**</span></label>
+                                <select class="form-control prefix" name="" id="txtPrefix">
+                                  <option value="">-- Choose name prefix --</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label font-bold fz08">Fistname <span class="text-danger">**</span></label>
+                                <input type="text" class="form-control" id="txtFname" placeholder="Enter firstname ..." >
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label font-bold fz08">Surname <span class="text-danger">**</span></label>
+                                <input type="text" class="form-control" id="txtLname" placeholder="Enter surname ..." >
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+                        <button type="button" class="btn btn-primary" onclick="sis.update_student_1()">Update</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.modal -->
+                <button class="btn btn-light btn-square" data-toggle="modal" data-target=".bs-example-modal-lg-info-1"><i class="fas fa-pencil-alt"></i></button>
               </div>
             </div>
 
@@ -176,7 +252,108 @@
                 Imigration information
               </div>
               <div class="col font-bold text-right">
-                <button class="btn btn-light btn-square" data-toggle="tooltip" data-placement="top" title="Update"><i class="fas fa-pencil-alt"></i></button>
+                <!-- sample modal content -->
+                <div class="modal fade bs-example-modal-lg-info-2 text-left" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Update Imigration information</h5>
+                        <button type="button" class="close txt-light btnCloseModal" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body fz09" style="background: rgb(250, 250, 250);">
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <span class="text-danger">** Please enter all required field.</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-body fz09">
+                        <form onsubmit="return false;" id="register-staff-form">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <h5>THAI Personnal ID</h5>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label font-bold fz08">THAI PID 13 digits</label>
+                                <input type="text" class="form-control" id="txtStudentID" placeholder="Enter THAI Personnal ID ..." >
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label font-bold fz08">THAI PID issue date</label>
+                                <input type="number" class="form-control" id="txtStartyear" placeholder="Enter start year ex. 2018" >
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="form-group">
+                                <label for="message-text" class="col-form-label font-bold fz08">THAI PID expire date </label>
+                                <input type="number" class="form-control" id="txtStartyear" placeholder="Enter start year ex. 2018" >
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <h5>VISA</h5>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label font-bold fz08">VISA ID</label>
+                                <input type="text" class="form-control" id="txtStudentID" placeholder="Enter VISA id..." >
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label font-bold fz08">VISA issue date</label>
+                                <input type="number" class="form-control" id="txtStartyear" placeholder="Enter start year ex. 2018" >
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="form-group">
+                                <label for="message-text" class="col-form-label font-bold fz08">VISA expire date </label>
+                                <input type="number" class="form-control" id="txtStartyear" placeholder="Enter start year ex. 2018" >
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <h5>Passport</h5>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label font-bold fz08">Passport ID</label>
+                                <input type="text" class="form-control" id="txtStudentID" placeholder="Enter passport id ..." >
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label font-bold fz08">Passport issue date</label>
+                                <input type="number" class="form-control" id="txtStartyear" placeholder="Enter start year ex. 2018" >
+                              </div>
+                            </div>
+                            <div class="col-sm-4">
+                              <div class="form-group">
+                                <label for="message-text" class="col-form-label font-bold fz08">Passport expire date </label>
+                                <input type="number" class="form-control" id="txtStartyear" placeholder="Enter start year ex. 2018" >
+                              </div>
+                            </div>
+                          </div>
+
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+                        <button type="button" class="btn btn-primary" onclick="sis.update_student_1()">Update</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.modal -->
+                <button class="btn btn-light btn-square"  data-toggle="modal" data-target=".bs-example-modal-lg-info-2"><i class="fas fa-pencil-alt"></i></button>
               </div>
             </div>
 
