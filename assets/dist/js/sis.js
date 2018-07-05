@@ -2,6 +2,160 @@ var current_user = window.localStorage.getItem(local_prefix + 'uid')
 var current_role = window.localStorage.getItem(local_prefix + 'role')
 
 var sis = {
+  save_scho: function(){
+    var check = 0;
+    $('.form-control').removeClass('is-invalid')
+    $('.invalid-feedback').remove()
+
+    if($('#txtScholarship').val() == ''){
+      check++
+      $('#txtScholarship').addClass('is-invalid')
+      $('#txtScholarship').parent().append('<div class="invalid-feedback text-right">Please enter scholarship name here</div>')
+    }
+
+    if(check != 0){
+      return false;
+    }
+
+    preload.show()
+
+    var param = {
+      scholarship: $('#txtScholarship').val(),
+      uid: current_user,
+      student_uid: current_student,
+      ess_id: $('#txtEssid').val()
+    }
+
+    var jxr = $.post(ws_url + 'register_student_scho.php', param, function(){})
+               .always(function(snap){
+                 // console.log(snap);
+                 if(snap == 'Y'){
+                   // Send email to registra
+
+                   $('.btnCloseModal').trigger('click')
+                   setTimeout(function(){
+                     preload.hide()
+                     sis.load_student_sholar_list()
+                     // alert('Add scholarship success!')
+                     // window.location.reload()
+                   }, 1000)
+                 }else{
+                   alert('Error')
+                   preload.hide()
+                 }
+               })
+               .fail(function(){
+                 alert('Fail')
+                 preload.hide()
+               })
+  },
+  save_advisor: function(){
+    var check = 0;
+    $('.form-control').removeClass('is-invalid')
+    $('.invalid-feedback').remove()
+
+    if($('#txtAdvisor').val() == ''){
+      check++
+      $('#txtAdvisor').addClass('is-invalid')
+      $('#txtAdvisor').parent().append('<div class="invalid-feedback text-right">Please choose advisor name</div>')
+    }
+
+    if($('#txtAdvisorStatus').val() == ''){
+      check++
+      $('#txtAdvisorStatus').addClass('is-invalid')
+      $('#txtAdvisorStatus').parent().append('<div class="invalid-feedback text-right">Please choose advisor status</div>')
+    }
+
+
+
+    if(check != 0){
+      return false;
+    }
+
+    preload.show()
+
+    var param = {
+      advisor_uid: $('#txtAdvisor').val(),
+      advisor_status: $('#txtAdvisorStatus').val(),
+      uid: current_user,
+      student_uid: current_student
+    }
+
+    var jxr = $.post(ws_url + 'register_student_advisor.php', param, function(){})
+               .always(function(snap){
+                 if(snap == 'Y'){
+                   // Send email to registra
+                   setTimeout(function(){
+                     alert('Add advisor success!')
+                     window.location.reload()
+                   }, 1000)
+                 }else{
+                   alert('Error')
+                   preload.hide()
+                 }
+               })
+               .fail(function(){
+                 alert('Fail')
+                 preload.hide()
+               })
+  },
+  load_student_sholar_list: function(){
+    var param = {
+      student_uid: current_student
+    }
+
+    var jxr = $.post(ws_url + 'get-student-scholar-list.php', param, function(){}, 'json')
+               .always(function(snap){
+                 if(fnc.checksnap(snap)){
+                   $('.table_response_scholarship').empty()
+                   snap.forEach(function(i){
+                     $data = '<tr>' +
+                                '<td><span class="font-bold txt-dark">' + i.ess_scholarship_name + '</span></td>' +
+                                '<td class="text-right">' +
+                                  '<a class="btn btn-secondary btn-square btn-sm text-light ml-5"  data-toggle="modal" data-target=".bs-example-modal-lg-info-1" onclick="setFundId(\'' + i.ess_id + '\', \'' + i.ess_scholarship_name + '\')"><i class="far fa-edit"></i></a>' +
+                                  '<a class="btn btn-danger btn-square btn-sm text-light ml-5" onclick="deleteFundId(\'' + i.ess_id + '\')"><i class="far fa-times-circle"></i></a>' +
+                                '</td>' +
+                             '</tr>'
+                     $('.table_response_scholarship').append($data)
+                   })
+                 }else{
+                   $('.table_response_scholarship').empty()
+                    $('.table_response_scholarship').append('<tr><td>No Scholarships</td></tr>')
+                 }
+               })
+  },
+  load_student_advisor_list: function(){
+    var param = {
+      student_uid: current_student
+    }
+
+    var jxr = $.post(ws_url + 'get-student-advisor-list.php', param, function(){}, 'json')
+               .always(function(snap){
+                 if(fnc.checksnap(snap)){
+                   $('.table_response_adv').empty()
+                   snap.forEach(function(i){
+                     $data = '<tr>' +
+                                '<td><span class="font-bold txt-dark">' + i.prefix_name + i.fname + ' ' + i.lname + '</span><br>' + i.adv_status + '</td>' +
+                                '<td class="text-right"><a class="btn btn-danger btn-square btn-sm text-light"><i class="far fa-times-circle"></i></a></td>' +
+                             '</tr>'
+                     $('.table_response_adv').append($data)
+                   })
+                 }
+               })
+  },
+  load_advisor_list: function(){
+    var jxr = $.post(ws_url + 'get-advisor-list.php', function(){}, 'json')
+               .always(function(snap){
+                 if(fnc.checksnap(snap)){
+                   $('#txtAdvisor').empty()
+                   $('#txtAdvisor').append('<option value="">-- Choose name prefix --</option>')
+                   snap.forEach(function(i){
+                     $data = '<option value="' + i.uid + '">' + i.prefix_name +  i.fname + ' ' + i.lname + '</option>'
+                     $('#txtAdvisor').append($data)
+                   })
+                 }
+               })
+  },
   manage_page_student: function(id, next_url){
     window.localStorage.setItem(local_prefix + 'selected_student', id)
     window.location = next_url
@@ -294,9 +448,9 @@ var sis = {
                                 '<td>' + i.s_student_id + '</td>' +
                                 '<td>' + i.prefix_name + i.fname + ' ' + i.lname +
                                   '<div class="pt-5">' +
-                                    '<button class="btn btn-secondary btn-icon-anim btn-square btn-sm mr-5 mb-5" data-toggle="tooltip" data-placement="top" title="View info" onclick="sis.manage_page_student(\'' + i.uid + '\',\'student-information.html\')"><i class="fas fa-search"></i></button>' +
-                                    '<button class="btn btn-secondary btn-icon-anim btn-square btn-sm mr-5 mb-5" data-toggle="tooltip" data-placement="top" title="Edit info"><i class="fas fa-pencil-alt"></i></button>' +
-                                    '<button class="btn btn-secondary btn-icon-anim btn-square btn-sm mr-5 mb-5" data-toggle="tooltip" data-placement="top" title="Manage"><i class="fas fa-cogs"></i></button>' +
+                                    '<button class="btn btn-secondary btn-icon-anim btn-square btn-sm mr-5 mb-5" data-toggle="tooltip" data-placement="top" title="View and update info" onclick="sis.manage_page_student(\'' + i.uid + '\',\'student-information.html\')"><i class="fas fa-search"></i></button>' +
+                                    // '<button class="btn btn-secondary btn-icon-anim btn-square btn-sm mr-5 mb-5" data-toggle="tooltip" data-placement="top" title="Edit info"><i class="fas fa-pencil-alt"></i></button>' +
+                                    '<button class="btn btn-secondary btn-icon-anim btn-square btn-sm mr-5 mb-5" data-toggle="tooltip" data-placement="top" title="Report"><i class="fas fa-chart-line"></i></button>' +
                                     '<button class="btn btn-secondary btn-icon-anim btn-square btn-sm mr-5 mb-5" data-toggle="tooltip" data-placement="top" title="Send message" disabled><i class="far fa-comment"></i></button>' +
                                     '<button class="btn btn-secondary btn-icon-anim btn-square btn-sm mr-5 mb-5" data-toggle="tooltip" data-placement="top" title="Send e-mail" disabled><i class="fas fa-envelope"></i></button>' +
                                     '<button class="btn btn-danger btn-icon-anim btn-square btn-sm mr-5 mb-5" data-toggle="tooltip" data-placement="top" title="Delete" onclick="sis.delete_student(\'' + i.uid + '\',\'' + i.s_student_id + '\')"><i class="fas fa-trash"></i></button>' +
@@ -559,4 +713,40 @@ function updateStaff(id){
                  preload.hide()
                }
              })
+}
+
+
+function setFundId(id, name){
+  $('#txtEssid').val(id)
+  $('#txtScholarship').val(name)
+}
+
+function deleteFundId(id){
+  var r = confirm("Confirm to do this operation!");
+  if (r == true) {
+    var param = {
+      ess_id: id,
+      student_uid: current_student
+    }
+
+    preload.show()
+
+    var jxr = $.post(ws_url + 'delete-scholar.php', param, function(){})
+               .always(function(resp){
+                 if(resp == 'Y'){
+                   // alert('Delete success')
+                   preload.hide()
+                   $('#txtEssid').val('')
+                   $('#txtScholarship').val('')
+                   sis.load_student_sholar_list()
+                 }else{
+                   alert('Fail')
+                   preload.hide()
+                 }
+               })
+               .fail(function(){
+                 alert('Fail')
+                 preload.hide()
+               })
+  }
 }

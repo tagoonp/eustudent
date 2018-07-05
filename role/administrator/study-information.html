@@ -95,7 +95,7 @@
     </nav>
 
     <div class="main-panel" style=" padding-bottom: 30px; min-height: 200px; background: rgb(241, 241, 241);">
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
 
           <div class="col-sm-12 mt-20">
@@ -121,22 +121,58 @@
                     Scholarships
                   </div>
                   <div class="col font-bold text-right">
-                    <button class="btn btn-light btn-square" data-toggle="tooltip" data-placement="top" title="Update"><i class="fas fa-pencil-alt"></i></button>
+                    <!-- sample modal content -->
+                    <div class="modal fade bs-example-modal-lg-info-1 text-left" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Manage scholarships</h5>
+                            <button type="button" class="close txt-light btnCloseModal" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body fz09" style="background: rgb(250, 250, 250);">
+                            <div class="row">
+                              <div class="col-sm-12">
+                                <span class="text-danger">** Please enter all required field.</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-body fz09">
+                            <form onsubmit="return false;" id="register-staff-form">
+                              <div class="row">
+                                <div class="col-sm-12">
+                                  <div class="form-group dn">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Scholarship's name <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter scholarships's name" id="txtEssid">
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Scholarship's name <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter scholarships's name" id="txtScholarship">
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+                            <button type="button" class="btn btn-primary" onclick="sis.save_scho()">Save</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.modal -->
+                    <button class="btn btn-light btn-square"  data-toggle="modal" data-target=".bs-example-modal-lg-info-1"><i class="fas fa-plus"></i></button>
                   </div>
                 </div>
 
-                <table class="table fz09" style="border_: solid; border-width_: 1px; ">
-                  <tbody style="background: #fff;" class="table_response txt-gray">
+                <table class="table fz09 mt-5" style="border_: solid; border-width_: 1px; ">
+                  <tbody style="background: #fff;" class="table_response_scholarship txt-gray">
                     <tr>
-                      <td style="width: 30%;" class="font-bold">Student ID :</td>
                       <td>
-                        <span class="txt_student_id"></span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="font-bold">Fullname :</td>
-                      <td>
-                        <span class="txt_student_fullname"></span>
+                        No Scholarships
                       </td>
                     </tr>
                   </tbody>
@@ -150,23 +186,64 @@
                     Advisor
                   </div>
                   <div class="col font-bold text-right">
-                    <button class="btn btn-light btn-square" data-toggle="tooltip" data-placement="top" title="Update"><i class="fas fa-pencil-alt"></i></button>
+                    <!-- sample modal content -->
+                    <div class="modal fade bs-example-modal-lg-info-2 text-left" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Manage advisor</h5>
+                            <button type="button" class="close txt-light btnCloseModal" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body fz09" style="background: rgb(250, 250, 250);">
+                            <div class="row">
+                              <div class="col-sm-12">
+                                <span class="text-danger">** Please enter all required field.</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-body fz09">
+                            <form onsubmit="return false;" id="register-staff-form">
+                              <div class="row">
+                                <div class="col-sm-6">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Choose advisor <span class="text-danger">**</span></label>
+                                    <select class="form-control" name="txtAdvisor" id="txtAdvisor">
+                                      <option value="">-- Choose advisor --</option>
+                                    </select>
+                                    <div class="pt-5" style="font-size: 0.8em;" >If not found advisor name in list <a href="staff.html">-Click here-</a> for add new teaching staff first.</div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-6">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Status <span class="text-danger">**</span></label>
+                                    <select class="form-control" name="txtAdvisorStatus" id="txtAdvisorStatus">
+                                      <option value="">-- Choose status --</option>
+                                      <option value="Main-advisor">Main advisor</option>
+                                      <option value="Co-advisor">Co-advisor</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+                            <button type="button" class="btn btn-primary" onclick="sis.save_advisor()">Save</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.modal -->
+                    <button class="btn btn-light btn-square" data-toggle="modal" data-target=".bs-example-modal-lg-info-2"><i class="fas fa-plus"></i></button>
                   </div>
                 </div>
 
-                <table class="table fz09" style="border_: solid; border-width_: 1px; ">
-                  <tbody style="background: #fff;" class="table_response txt-gray">
+                <table class="table fz09 mt-5" style="border_: solid; border-width_: 1px; ">
+                  <tbody style="background: #fff;" class="table_response_adv txt-gray">
                     <tr>
-                      <td style="width: 30%;" class="font-bold">Student ID :</td>
-                      <td>
-                        <span class="txt_student_id"></span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="font-bold">Fullname :</td>
-                      <td>
-                        <span class="txt_student_fullname"></span>
-                      </td>
+                      <td class="font-bold">No advisor information</td>
                     </tr>
                   </tbody>
                 </table>
@@ -178,8 +255,52 @@
                 Study Progress
               </div>
               <div class="col font-bold text-right">
-                <button class="btn btn-light btn-square" data-toggle="tooltip" data-placement="top" title="Add progress"><i class="fas fa-plus"></i></button>
-                <button class="btn btn-light btn-square" data-toggle="tooltip" data-placement="top" title="View all transection"><i class="fas fa-bars"></i></button>
+
+                <!-- sample modal content -->
+                <div class="modal fade bs-example-modal-lg-info-progress-1 text-left" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Manage scholarships</h5>
+                        <button type="button" class="close txt-light btnCloseModal" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body fz09" style="background: rgb(250, 250, 250);">
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <span class="text-danger">** Please enter all required field.</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-body fz09">
+                        <form onsubmit="return false;" id="register-staff-form">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <div class="form-group dn">
+                                <label for="recipient-name" class="col-form-label font-bold fz08">Scholarship's name <span class="text-danger">**</span></label>
+                                <input type="text" class="form-control" placeholder="Enter scholarships's name" id="txtEssid">
+                              </div>
+                            </div>
+                            <div class="col-sm-12">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label font-bold fz08">Scholarship's name <span class="text-danger">**</span></label>
+                                <input type="text" class="form-control" placeholder="Enter scholarships's name" id="txtScholarship">
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+                        <button type="button" class="btn btn-primary" onclick="sis.save_scho()">Save</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.modal -->
+                <button class="btn btn-primary btn-square" data-toggle="modal" data-target=".bs-example-modal-lg-info-progress-1"><i class="fas fa-plus"></i></button>
+                <button class="btn btn-primary btn-square" data-toggle="tooltip" data-placement="top" title="View all transection"><i class="fas fa-bars"></i></button>
               </div>
             </div>
 
@@ -206,7 +327,216 @@
                         <span class="txt_student_pid_exp">-</span>
                       </td>
                     </tr>
+                  </tbody>
+                </table>
 
+                <!-- EC -->
+                <div class="row">
+                  <div class="col font-bold text-right">
+                    <!-- sample modal content -->
+                    <div class="modal fade bs-example-modal-lg-info-progress-1 text-left" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Manage scholarships</h5>
+                            <button type="button" class="close txt-light btnCloseModal" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body fz09" style="background: rgb(250, 250, 250);">
+                            <div class="row">
+                              <div class="col-sm-12">
+                                <span class="text-danger">** Please enter all required field.</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-body fz09">
+                            <form onsubmit="return false;" id="register-staff-form">
+                              <div class="row">
+                                <div class="col-sm-12">
+                                  <div class="form-group dn">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Scholarship's name <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter scholarships's name" id="txtEssid">
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Scholarship's name <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter scholarships's name" id="txtScholarship">
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+                            <button type="button" class="btn btn-primary" onclick="sis.save_scho()">Save</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.modal -->
+                    <button class="btn btn-primary btn-square" data-toggle="modal" data-target=".bs-example-modal-lg-info-progress-1"><i class="fas fa-plus"></i></button>
+                    <button class="btn btn-primary btn-square" data-toggle="tooltip" data-placement="top" title="View all transection"><i class="fas fa-bars"></i></button>
+                  </div>
+                </div>
+
+                <table class="table fz09 mt-5" style="border_: solid; border-width_: 1px; ">
+                  <tbody style="background: #fff;" class="table_response txt-gray">
+                    <tr>
+                      <td colspan="4" class="font-bold txt-light" style="background: rgb(97, 112, 122);">Ethic</td>
+                    </tr>
+                    <tr>
+                      <td class="font-bold">VISA ID :</td>
+                      <td colspan="3">
+                        <span class="txt_student_visa_id">-</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="width: 25%;" class="font-bold">Issue :</td>
+                      <td>
+                        <span class="txt_student_visa_iss">-</span>
+                      </td>
+                      <td style="width: 25%;" class="font-bold">Expire :</td>
+                      <td>
+                        <span class="txt_student_visa_exp">-</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- EC -->
+
+
+
+                <!-- Qualification -->
+                <div class="row">
+                  <div class="col font-bold text-right">
+                    <!-- sample modal content -->
+                    <div class="modal fade bs-example-modal-lg-info-progress-1 text-left" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Manage scholarships</h5>
+                            <button type="button" class="close txt-light btnCloseModal" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body fz09" style="background: rgb(250, 250, 250);">
+                            <div class="row">
+                              <div class="col-sm-12">
+                                <span class="text-danger">** Please enter all required field.</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-body fz09">
+                            <form onsubmit="return false;" id="register-staff-form">
+                              <div class="row">
+                                <div class="col-sm-12">
+                                  <div class="form-group dn">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Scholarship's name <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter scholarships's name" id="txtEssid">
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Scholarship's name <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter scholarships's name" id="txtScholarship">
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+                            <button type="button" class="btn btn-primary" onclick="sis.save_scho()">Save</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.modal -->
+                    <button class="btn btn-primary btn-square" data-toggle="modal" data-target=".bs-example-modal-lg-info-progress-1"><i class="fas fa-plus"></i></button>
+                    <button class="btn btn-primary btn-square" data-toggle="tooltip" data-placement="top" title="View all transection"><i class="fas fa-bars"></i></button>
+                  </div>
+                </div>
+
+                <table class="table fz09 mt-5" style="border_: solid; border-width_: 1px; ">
+                  <tbody style="background: #fff;" class="table_response txt-gray">
+                    <tr>
+                      <td colspan="4" class="font-bold txt-light" style="background: rgb(97, 112, 122);">Qualification examination</td>
+                    </tr>
+                    <tr>
+                      <td class="font-bold">Passport ID :</td>
+                      <td colspan="3">
+                        <span class="txt_student_passport_id">-</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="width: 25%;" class="font-bold">Issue :</td>
+                      <td>
+                        <span class="txt_student_passport_iss">-</span>
+                      </td>
+                      <td style="width: 25%;" class="font-bold">Expire :</td>
+                      <td>
+                        <span class="txt_student_passport_exp">-</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- Qualification -->
+
+                <!-- Thesis -->
+                <div class="row">
+                  <div class="col font-bold text-right">
+                    <!-- sample modal content -->
+                    <div class="modal fade bs-example-modal-lg-info-progress-1 text-left" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Manage scholarships</h5>
+                            <button type="button" class="close txt-light btnCloseModal" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body fz09" style="background: rgb(250, 250, 250);">
+                            <div class="row">
+                              <div class="col-sm-12">
+                                <span class="text-danger">** Please enter all required field.</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-body fz09">
+                            <form onsubmit="return false;" id="register-staff-form">
+                              <div class="row">
+                                <div class="col-sm-12">
+                                  <div class="form-group dn">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Scholarship's name <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter scholarships's name" id="txtEssid">
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Scholarship's name <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter scholarships's name" id="txtScholarship">
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+                            <button type="button" class="btn btn-primary" onclick="sis.save_scho()">Save</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.modal -->
+                    <button class="btn btn-primary btn-square" data-toggle="modal" data-target=".bs-example-modal-lg-info-progress-1"><i class="fas fa-plus"></i></button>
+                    <button class="btn btn-primary btn-square" data-toggle="tooltip" data-placement="top" title="View all transection"><i class="fas fa-bars"></i></button>
+                  </div>
+                </div>
+
+                <table class="table fz09 mt-5" style="border_: solid; border-width_: 1px; ">
+                  <tbody style="background: #fff;" class="table_response txt-gray">
                     <tr>
                       <td colspan="4" class="font-bold txt-light" style="background: rgb(97, 112, 122);">Thesis examination</td>
                     </tr>
@@ -226,30 +556,257 @@
                         <span class="txt_student_visa_exp">-</span>
                       </td>
                     </tr>
+                  </tbody>
+                </table>
+                <!-- Thesis -->
 
+                <!-- Complihensive -->
+                <div class="row">
+                  <div class="col font-bold text-right">
+                    <!-- sample modal content -->
+                    <div class="modal fade bs-example-modal-lg-info-progress-1 text-left" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Manage scholarships</h5>
+                            <button type="button" class="close txt-light btnCloseModal" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body fz09" style="background: rgb(250, 250, 250);">
+                            <div class="row">
+                              <div class="col-sm-12">
+                                <span class="text-danger">** Please enter all required field.</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-body fz09">
+                            <form onsubmit="return false;" id="register-staff-form">
+                              <div class="row">
+                                <div class="col-sm-12">
+                                  <div class="form-group dn">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Scholarship's name <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter scholarships's name" id="txtEssid">
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Scholarship's name <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter scholarships's name" id="txtScholarship">
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+                            <button type="button" class="btn btn-primary" onclick="sis.save_scho()">Save</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.modal -->
+                    <button class="btn btn-primary btn-square" data-toggle="modal" data-target=".bs-example-modal-lg-info-progress-1"><i class="fas fa-plus"></i></button>
+                    <button class="btn btn-primary btn-square" data-toggle="tooltip" data-placement="top" title="View all transection"><i class="fas fa-bars"></i></button>
+                    <button class="btn btn-primary btn-square" data-toggle="tooltip" data-placement="top" title="Make this progress pass"><i class="fas fa-check"></i></button>
+                  </div>
+                </div>
+
+                <table class="table fz09 mt-5" style="border_: solid; border-width_: 1px; ">
+                  <tbody style="background: #fff;" class="table_response txt-gray">
                     <tr>
-                      <td colspan="4" class="font-bold txt-light" style="background: rgb(97, 112, 122);">English test</td>
+                      <td colspan="4" class="font-bold txt-light" style="background: rgb(97, 112, 122);">Complehensive</td>
                     </tr>
                     <tr>
-                      <td class="font-bold">Passport ID :</td>
+                      <td class="font-bold">VISA ID :</td>
                       <td colspan="3">
-                        <span class="txt_student_passport_id">-</span>
+                        <span class="txt_student_visa_id">-</span>
                       </td>
                     </tr>
                     <tr>
                       <td style="width: 25%;" class="font-bold">Issue :</td>
                       <td>
-                        <span class="txt_student_passport_iss">-</span>
+                        <span class="txt_student_visa_iss">-</span>
                       </td>
                       <td style="width: 25%;" class="font-bold">Expire :</td>
                       <td>
-                        <span class="txt_student_passport_exp">-</span>
+                        <span class="txt_student_visa_exp">-</span>
                       </td>
                     </tr>
-
-
                   </tbody>
                 </table>
+                <!-- Complihensive -->
+
+                <!-- Publication -->
+                <div class="row">
+                  <div class="col font-bold text-right">
+                    <!-- sample modal content -->
+                    <div class="modal fade bs-example-modal-lg-info-progress-publication text-left" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Publications progress</h5>
+                            <button type="button" class="close txt-light btnCloseModal" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body fz09" style="background: rgb(250, 250, 250);">
+                            <div class="row">
+                              <div class="col-sm-12">
+                                <span class="text-danger">** Please enter all required field.</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-body fz09">
+                            <form onsubmit="return false;" id="register-staff-form">
+                              <div class="row">
+                                <div class="col-sm-12">
+                                  <div class="form-group dn">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Scholarship's name <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter scholarships's name" id="txtEssid">
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Title <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter scholarships's name" id="txtScholarship">
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Name of jurnal / publisher <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter scholarships's name" id="txtScholarship">
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label for="recipient-name" class="col-form-label font-bold fz08">Accept date <span class="text-danger">**</span></label>
+                                      <input type="text" class="form-control" placeholder="Enter scholarships's name" id="txtScholarship">
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label for="recipient-name" class="col-form-label font-bold fz08">Name of jurnal / publisher <span class="text-danger">**</span></label>
+                                      <input type="text" class="form-control" placeholder="Enter scholarships's name" id="txtScholarship">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+                            <button type="button" class="btn btn-primary" onclick="sis.save_scho()">Save</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.modal -->
+                    <button class="btn btn-primary btn-square" data-toggle="modal" data-target=".bs-example-modal-lg-info-progress-publication"><i class="fas fa-plus"></i></button>
+                    <button class="btn btn-primary btn-square" data-toggle="tooltip" data-placement="top" title="Make this progress pass"><i class="fas fa-check"></i></button>
+                  </div>
+                </div>
+
+                <table class="table fz09 mt-5" style="border_: solid; border-width_: 1px; ">
+                  <tbody style="background: #fff;" class="table_response txt-gray">
+                    <tr>
+                      <td colspan="4" class="font-bold txt-light" style="background: rgb(97, 112, 122);">Publications</td>
+                    </tr>
+                    <tr>
+                      <td class="font-bold">VISA ID :</td>
+                      <td colspan="3">
+                        <span class="txt_student_visa_id">-</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="width: 25%;" class="font-bold">Issue :</td>
+                      <td>
+                        <span class="txt_student_visa_iss">-</span>
+                      </td>
+                      <td style="width: 25%;" class="font-bold">Expire :</td>
+                      <td>
+                        <span class="txt_student_visa_exp">-</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- Publication -->
+
+                <!-- English -->
+                <div class="row">
+                  <div class="col font-bold text-right">
+                    <!-- sample modal content -->
+                    <div class="modal fade bs-example-modal-lg-info-progress-english text-left" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">English score</h5>
+                            <button type="button" class="close txt-light btnCloseModal" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body fz09" style="background: rgb(250, 250, 250);">
+                            <div class="row">
+                              <div class="col-sm-12">
+                                <span class="text-danger">** Please enter all required field.</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-body fz09">
+                            <form onsubmit="return false;" id="register-staff-form">
+                              <div class="row">
+                                <div class="col-sm-6">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Score <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter english score ..." id="txtScholarship">
+                                  </div>
+                                </div>
+                                <div class="col-sm-6">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Examination name <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter institution or test name ..." id="txtScholarship">
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+                            <button type="button" class="btn btn-primary" onclick="sis.save_progress_7()">Save</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.modal -->
+                    <button class="btn btn-primary btn-square" data-toggle="modal" data-target=".bs-example-modal-lg-info-progress-english"><i class="fas fa-plus"></i></button>
+                    <button class="btn btn-primary btn-square" data-toggle="tooltip" data-placement="top" title="Make this progress pass"><i class="fas fa-check"></i></button>
+                  </div>
+                </div>
+
+                <table class="table fz09 mt-5" style="border_: solid; border-width_: 1px; ">
+                  <tbody style="background: #fff;" class="table_response txt-gray">
+                    <tr>
+                      <td colspan="4" class="font-bold txt-light" style="background: rgb(97, 112, 122);">English examination</td>
+                    </tr>
+                    <tr>
+                      <td class="font-bold">VISA ID :</td>
+                      <td colspan="3">
+                        <span class="txt_student_visa_id">-</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="width: 25%;" class="font-bold">Issue :</td>
+                      <td>
+                        <span class="txt_student_visa_iss">-</span>
+                      </td>
+                      <td style="width: 25%;" class="font-bold">Expire :</td>
+                      <td>
+                        <span class="txt_student_visa_exp">-</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- English -->
+
               </div>
             </div>
 
@@ -372,6 +929,9 @@
         console.log('Selected student -> ' + current_student);
         sis.load_prefix()
         sis.load_student_info()
+        sis.load_advisor_list()
+        sis.load_student_advisor_list()
+        sis.load_student_sholar_list()
 
         $('[data-toggle="tooltip"]').tooltip()
       })
