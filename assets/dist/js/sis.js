@@ -2,6 +2,85 @@ var current_user = window.localStorage.getItem(local_prefix + 'uid')
 var current_role = window.localStorage.getItem(local_prefix + 'role')
 
 var sis = {
+  load_progress: function(id){
+    var param = {
+      student_uid: current_student,
+      progress_id: id
+    }
+    var jxr = $.post(ws_url + 'get-student-progress.php', param, function(){}, 'json')
+               .always(function(snap){
+                 if(fnc.checksnap(snap)){
+                   if(id == '7'){
+                     $('#progress_7').empty()
+                     snap.forEach(function(i){
+                       $data = '<tr style="background: #fff;">' +
+                                  '<td>' + i.ep7_test_name + ' : Score ' + i.ep7_score + '<div style="font-size: 0.8em;">Description: ' + i.ep7_info + '</div><div style="font-size: 0.8em;">Update date: ' + i.ep7_udate + '</div></td>' +
+                                  '<td class="text-right" style="width: 200px;">' +
+                                    '<a class="btn btn-secondary btn-square btn-sm text-light ml-5"  data-toggle="modal" data-target=".bs-example-modal-lg-info-progress-english" onclick="editProgress(\'' + i.ep7_id + '\', 7, \'' + i.ep7_test_name + '\', \'' + i.ep7_score + '\', \'' + i.ep7_info + '\')"><i class="fas fa-pencil-alt"></i></a>' +
+                                    '<a class="btn btn-danger btn-square btn-sm text-light ml-5"  data-toggle="modal" data-target=".bs-example-modal-lg-info-1" onclick="deleteProgress(\'' + i.ep7_id + '\', 7)"><i class="fas fa-times-circle"></i></a>' +
+                                  '</td>' +
+                               '</tr>'
+                       $('#progress_7').append($data)
+                     })
+                   }
+                 }else{
+                   if(id == '7'){
+                     $('#progress_7').empty()
+                     $('#progress_7').append('<tr style="background: #fff;"><td colspan="2">No record found</td></tr>')
+                   }
+                 }
+               })
+  },
+  save_progress_7: function(){
+    var check = 0;
+    $('.form-control').removeClass('is-invalid')
+    $('.invalid-feedback').remove()
+
+    if($('#txtP7Score').val() == ''){
+      check++
+      $('#txtP7Score').addClass('is-invalid')
+      $('#txtP7Score').parent().append('<div class="invalid-feedback text-right">Please enter score</div>')
+    }
+
+    if($('#txtP7Name').val() == ''){
+      check++
+      $('#txtP7Name').addClass('is-invalid')
+      $('#txtP7Name').parent().append('<div class="invalid-feedback text-right">Please enter test name</div>')
+    }
+
+    if(check != 0){
+      return false;
+    }
+
+    preload.show()
+
+    var param = {
+      e7_id: $('#txtE7id').val(),
+      score: $('#txtP7Score').val(),
+      testname: $('#txtP7Name').val(),
+      desc: $('#txtP7Desc').val(),
+      uid: current_user,
+      student_uid: current_student,
+      progress_id: 7
+    }
+
+    var jxr = $.post(ws_url + 'register_student_progress.php', param, function(){})
+               .always(function(resp){
+                 if(resp == 'Y'){
+                   $('.btnCloseModal').trigger('click')
+                   preload.hide()
+                   sis.load_progress(7)
+                 }else{
+                   preload.hide()
+                   alert('Fail')
+                 }
+               })
+               .fail(function(){
+                 preload.hide()
+                 alert('Fail')
+               })
+
+  },
   save_scho: function(){
     var check = 0;
     $('.form-control').removeClass('is-invalid')
@@ -748,5 +827,14 @@ function deleteFundId(id){
                  alert('Fail')
                  preload.hide()
                })
+  }
+}
+
+function editProgress(record_id, progress, info_1, info_2, info_3){
+  $('#txtE' + progress + 'id').val(record_id)
+  if(progress == 7){
+    $('#txtP7Score').val(info_2)
+    $('#txtP7Name').val(info_1)
+    $('#txtP7Desc').val(info_3)
   }
 }

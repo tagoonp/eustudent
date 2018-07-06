@@ -754,16 +754,28 @@
                           <div class="modal-body fz09">
                             <form onsubmit="return false;" id="register-staff-form">
                               <div class="row">
+                                <div class="col-sm-12">
+                                  <div class="form-group dn">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Score <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter english score ..." id="txtE7id">
+                                  </div>
+                                </div>
                                 <div class="col-sm-6">
                                   <div class="form-group">
                                     <label for="recipient-name" class="col-form-label font-bold fz08">Score <span class="text-danger">**</span></label>
-                                    <input type="text" class="form-control" placeholder="Enter english score ..." id="txtScholarship">
+                                    <input type="text" class="form-control" placeholder="Enter english score ..." id="txtP7Score">
                                   </div>
                                 </div>
                                 <div class="col-sm-6">
                                   <div class="form-group">
                                     <label for="recipient-name" class="col-form-label font-bold fz08">Examination name <span class="text-danger">**</span></label>
-                                    <input type="text" class="form-control" placeholder="Enter institution or test name ..." id="txtScholarship">
+                                    <input type="text" class="form-control" placeholder="Enter institution or test name ..." id="txtP7Name">
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">More description </label>
+                                    <textarea class="form-control" placeholder="Enter description ..." id="txtP7Desc"></textarea>
                                   </div>
                                 </div>
                               </div>
@@ -785,22 +797,13 @@
                 <table class="table fz09 mt-5" style="border_: solid; border-width_: 1px; ">
                   <tbody style="background: #fff;" class="table_response txt-gray">
                     <tr>
-                      <td colspan="4" class="font-bold txt-light" style="background: rgb(97, 112, 122);">English examination</td>
+                      <td colspan="2" class="font-bold txt-light" style="background: rgb(97, 112, 122);">English examination</td>
                     </tr>
+                  </tbody>
+                  <tbody id="progress_7">
                     <tr>
-                      <td class="font-bold">VISA ID :</td>
-                      <td colspan="3">
-                        <span class="txt_student_visa_id">-</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style="width: 25%;" class="font-bold">Issue :</td>
-                      <td>
-                        <span class="txt_student_visa_iss">-</span>
-                      </td>
-                      <td style="width: 25%;" class="font-bold">Expire :</td>
-                      <td>
-                        <span class="txt_student_visa_exp">-</span>
+                      <td colspan="2">
+                        No record found
                       </td>
                     </tr>
                   </tbody>
@@ -932,6 +935,8 @@
         sis.load_advisor_list()
         sis.load_student_advisor_list()
         sis.load_student_sholar_list()
+
+        sis.load_progress(7)
 
         $('[data-toggle="tooltip"]').tooltip()
       })
