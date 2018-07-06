@@ -2,6 +2,36 @@ var current_user = window.localStorage.getItem(local_prefix + 'uid')
 var current_role = window.localStorage.getItem(local_prefix + 'role')
 
 var sis = {
+  setProgressPass: function(id){
+
+    var r = confirm("Confirm to change this progress status pass!");
+
+    if (r == true) {
+
+      var param = {
+        progress_id: id,
+        student_uid: current_student,
+        uid: current_user
+      }
+
+      preload.show()
+      
+      var jxr = $.post(ws_url + 'update-progress-pass.php', param, function(){})
+                 .always(function(resp){
+                   if(resp == 'Y'){
+                     alert('Update success')
+                     window.location.reload()
+                   }else{
+                     alert('Fail')
+                     preload.hide()
+                   }
+                 })
+                 .fail(function(){
+                   alert('Fail')
+                   preload.hide()
+                 })
+    }
+  },
   load_progress: function(id){
     var param = {
       student_uid: current_student,
@@ -17,7 +47,7 @@ var sis = {
                                   '<td>' + i.ep7_test_name + ' : Score ' + i.ep7_score + '<div style="font-size: 0.8em;">Description: ' + i.ep7_info + '</div><div style="font-size: 0.8em;">Update date: ' + i.ep7_udate + '</div></td>' +
                                   '<td class="text-right" style="width: 200px;">' +
                                     '<a class="btn btn-secondary btn-square btn-sm text-light ml-5"  data-toggle="modal" data-target=".bs-example-modal-lg-info-progress-english" onclick="editProgress(\'' + i.ep7_id + '\', 7, \'' + i.ep7_test_name + '\', \'' + i.ep7_score + '\', \'' + i.ep7_info + '\')"><i class="fas fa-pencil-alt"></i></a>' +
-                                    '<a class="btn btn-danger btn-square btn-sm text-light ml-5"  data-toggle="modal" data-target=".bs-example-modal-lg-info-1" onclick="deleteProgress(\'' + i.ep7_id + '\', 7)"><i class="fas fa-times-circle"></i></a>' +
+                                    '<a class="btn btn-danger btn-square btn-sm text-light ml-5"  onclick="deleteProgress(\'' + i.ep7_id + '\', 7)"><i class="fas fa-times-circle"></i></a>' +
                                   '</td>' +
                                '</tr>'
                        $('#progress_7').append($data)
@@ -836,5 +866,34 @@ function editProgress(record_id, progress, info_1, info_2, info_3){
     $('#txtP7Score').val(info_2)
     $('#txtP7Name').val(info_1)
     $('#txtP7Desc').val(info_3)
+  }
+}
+
+function deleteProgress(record_id, progress){
+  var r = confirm("Confirm to do this operation!");
+  if (r == true) {
+    var param = {
+      record: record_id,
+      progress_id: progress,
+      student_uid: current_student,
+      uid: current_user
+    }
+
+    preload.show()
+
+    var jxr = $.post(ws_url + 'delete-progress.php', param, function(){})
+               .always(function(resp){
+                 if(resp == 'Y'){
+                   preload.hide()
+                   sis.load_progress(progress)
+                 }else{
+                   alert('Fail')
+                   preload.hide()
+                 }
+               })
+               .fail(function(){
+                 alert('Fail')
+                 preload.hide()
+               })
   }
 }

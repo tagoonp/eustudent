@@ -22,12 +22,12 @@ $uid = mysqli_real_escape_string($conn, $_POST['uid']);
 $student_uid = mysqli_real_escape_string($conn, $_POST['student_uid']);
 $progress_id = mysqli_real_escape_string($conn, $_POST['progress_id']);
 
-$tb_p1 = $dbprefix."account";
-$tb_p2 = $dbprefix."userinfo";
-$tb_p3 = $dbprefix."prefix";
-$tb_p4 = $dbprefix."student_info";
-$tb_p5 = $dbprefix."degree";
-$tb_p6 = $dbprefix."degree";
+$tb_p1 = $dbprefix."progress_proposal";
+$tb_p2 = $dbprefix."progress_ec";
+$tb_p3 = $dbprefix."progress_qualification";
+$tb_p4 = $dbprefix."progress_thesis";
+$tb_p5 = $dbprefix."progress_complehensive";
+$tb_p6 = $dbprefix."progress_publication";
 $tb_p7 = $dbprefix."progress_english";
 
 if($progress_id == 7){
