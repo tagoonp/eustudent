@@ -20,6 +20,11 @@ $id = mysqli_real_escape_string($conn, $_POST['id']);
 $st = mysqli_real_escape_string($conn, $_POST['st']);
 $key = mysqli_real_escape_string($conn, $_POST['key']);
 
+$con1 = '';
+$con2 = '';
+$con3 = '';
+$con4 = '';
+
 if($id != ''){
   $con1 = " AND c.s_student_id LIKE '$id%' ";
 }
@@ -48,7 +53,7 @@ $strSQL = "SELECT * FROM $tb1 a INNER JOIN $tb2 b ON a.uid = b.info_uid
            LEFT JOIN $tb3 d ON b.prefix = d.prefix_id
            INNER JOIN $tb5 e ON c.s_degree = e.degree_id
            WHERE
-            a.delete_status = '0' AND a.role = 'student' $con1 $con2 $con3 $con4
+            a.delete_status = '0' AND b.info_use_status = '1' AND c.s_use_status = '1' AND a.role = 'student' $con1 $con2 $con3 $con4
             LIMIT $start, $lpp
           ";
 $result = select($conn, $strSQL);

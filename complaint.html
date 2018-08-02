@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>Epidemiology Unit Complaint System</title>
+
+    <!-- Bootstrap -->
+    <link href="./bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Preload -->
+    <link rel="stylesheet" href="./node_modules/preload.js/dist/css/preload.css">
+
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+    <style media="screen">
+      body{
+        /* background: rgb(241, 241, 241); */
+      }
+    </style>
+
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand font-bold" href="index.html">
+          <img src="/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+          SIS
+        </a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item ">
+            <a href="index.html" class="nav-link active">Home</a>
+          </li>
+          <li class="nav-item ">
+            <a href="about.html" class="nav-link">About</a>
+          </li>
+          <li class="nav-item ">
+            <a href="study-calendar.html" class="nav-link">Study calendar</a>
+          </li>
+        </ul>
+        <div class="form-inline my-2 my-lg-0">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item ">
+              <a href="http://medipe2.psu.ac.th" target="_blank" class="nav-link">Medipe2</a>
+            </li>
+            <li class="nav-item active">
+              <a href="http://medipe2.psu.ac.th/complaintsystem/" target="_blank" class="nav-link">Complaint System</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="main-panel" style="background: rgb(241, 241, 241); padding-bottom: 80px;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 offset-md-2 pt-10 mt-30 mb-30 text-center">
+            <h4>Epidemiology Unit</h4>
+            <h2>Complaint System</h2>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-10 offset-md-1 mt-0 text-left">
+            <form action="#" onsubmit="return false;" autocomplete="off" id="complaintForm">
+              <div class="form-group">
+                <label for="" class="font-bold fz08">Title <span class="text-danger">**</span></label>
+                <input type="text" class="form-control" id="txtComptitle" autofocus >
+              </div>
+
+              <div class="form-group">
+                <label for="" class="font-bold fz08">Information / Complaint word <span class="text-danger">**</span></label>
+                <textarea name="txtComp" id="txtComp" rows="8" cols="80" ></textarea>
+              </div>
+
+              <div class="form-group text-center pt-0">
+                <div class="clear-fix"></div>
+                <button class="btn btn-primary btn-block btn-lg pl-30 pr-30" type="submit">Send to staff</button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+
+    <script type="text/javascript" src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./bower_components/ckeditor_lite/ckeditor.js"></script>
+    <script type="text/javascript" src="./assets/js/main.js"></script>
+    <script type="text/javascript" src="./assets/js/function.js"></script>
+    <script type="text/javascript" src="./node_modules/preload.js/dist/js/preload.js"></script>
+    <script type="text/javascript" src="./assets/dist/js/authen.js"></script>
+    <script type="text/javascript">
+
+      var compData = ''
+
+      $(document).ready(function(){
+        compData = CKEDITOR.replace( 'txtComp', {
+          wordcount : {
+            showCharCount : false,
+            showWordCount : true
+          },
+          height: '250px'
+        });
+      })
+
+      $(function(){
+        $('#complaintForm').submit(function(){
+
+          var check = 0;
+          $('.form-control').removeClass('is-invalid')
+          $('.invalid-feedback').remove()
+
+          if($('#txtComptitle').val() == ''){
+            check++
+            $('#txtComptitle').addClass('is-invalid')
+          }
+
+          $data = compData.getData()
+
+          if($data == ''){
+            check++
+            $('#txtComp').addClass('is-invalid')
+          }
+
+          if(check != 0){
+            return false;
+          }
+
+          preload.show()
+
+          var param = {
+            title: $('#txtComptitle').val(),
+            content: $data
+          }
+
+          var jxr = $.post(ws_url + 'add-complaint.php', param, function(){})
+                     .always(function(resp){
+                       preload.hide()
+                       if(resp == 'Y'){
+                         alert('Message sended');
+                         window.location.reload()
+                       }else{
+                         alert('Error, please try again later')
+                       }
+                     })
+
+          return ;
+        })
+      })
+    </script>
+  </body>
+</html>

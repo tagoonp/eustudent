@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>SIS : Administrator</title>
+
+    <!-- Bootstrap -->
+    <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Fontawesom -->
+    <link href="../../bower_components/fontawesome/web-fonts-with-css/css/fontawesome-all.css" rel="stylesheet">
+    <!-- Preload -->
+    <link rel="stylesheet" href="../../node_modules/preload.js/dist/css/preload.css">
+
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <style media="screen">
+      body{
+        /* background: rgb(241, 241, 241); */
+      }
+
+      .navbar-light .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 1);
+      }
+
+      .navbar-light .navbar-nav .nav-link:hover {
+            color: rgba(255, 199, 0, 1);
+      }
+
+      .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+          color: rgba(255, 255, 255, 1);
+          font-weight: 500;
+      }
+    </style>
+
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: rgb(77, 90, 96) !important;">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand font-bold text-warning" href="#">
+          <img src="../../img/eu-sis-logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+          SIS
+        </a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item ">
+            <a href="index.html" class="nav-link active">Dashboard</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Management</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="staff.html">Staff</a>
+              <a class="dropdown-item" href="student.html">Students</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Report</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown02">
+              <a class="dropdown-item" href="report/report1.html">Student overview</a>
+            </div>
+          </li>
+          <li class="nav-item ">
+            <a href="conplaint.html" class="nav-link">Complaint system</a>
+          </li>
+
+
+        </ul>
+        <div class="form-inline my-2 my-lg-0">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0 text-warning">
+            <li class="nav-item dropdown text-warning">
+              <a class="nav-link dropdown-toggle text-warning" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="far fa-user-circle fa-2x text-warning"></i>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="left: -160px !important;">
+                <a class="dropdown-item" href="#">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="userName font-bold">Tagoon Prappre</div>
+                      <div class="userEmail fz08">wisnior.c@gmail.com</div>
+                      <button class="btn btn-md btn-block btn-primary mt-10">Account setting</button>
+                    </div>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="changepassword.html"><i class="fas fa-key mr-10"></i>Change password</a>
+                <a class="dropdown-item" href="Javascript:authen.signout()"><i class="fas fa-sign-out-alt mr-10"></i>Logout</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="main-panel" style=" padding-bottom: 30px; min-height: 200px; background: rgb(241, 241, 241);">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12 mt-30">
+            <div class="row">
+              <div class="col-sm-12 font-bold">
+                All complaint record
+              </div>
+            </div>
+
+            <div class="row pt-10">
+              <div class="col font-bold">
+                <button class="btn btn-square btn-icon-anim btn-primary ppage"><i class="fas fa-chevron-left"></i> Previous page</button>
+              </div>
+              <div class="col text-right">
+                <button class="btn btn-square btn-icon-anim btn-primary npage">Next page <i class="fas fa-chevron-right"></i></button>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-12 pt-10">
+                <table class="table fz09" style="border_: solid; border-width_: 1px; ">
+                  <thead style="background: #fff; border-radius:100px;" class="txt-gray">
+                    <tr>
+                      <th style="border-top: 0px; width: 80px;">#</th>
+                      <th style="border-top: 0px;">Title</th>
+                      <th style="border-top: 0px; width: 220px;">Date-time</th>
+                      <th style="border-top: 0px; width: 100px;"></th>
+                    </tr>
+                  </thead>
+                  <tbody style="background: #fff;" class="table_response txt-gray">
+                    <tr>
+                      <td colspan="5">No complaint record found</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="row pt-0">
+              <div class="col font-bold">
+                <button class="btn btn-square btn-icon-anim btn-primary ppage"><i class="fas fa-chevron-left"></i> Previous page</button>
+              </div>
+              <div class="col text-right">
+                <button class="btn btn-square btn-icon-anim btn-primary npage">Next page <i class="fas fa-chevron-right"></i></button>
+              </div>
+            </div>
+
+
+          </div>
+          <!-- .col-md-9 -->
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row dn">
+      <div class="container">
+        <button class="btn btn-block btn-primary font-bold mb-10" data-toggle="modal" data-target=".bd-example-modal-lg-delete-project" id="btnDeleteProject">Delete project</button>
+        <button class="btn btn-block btn-primary font-bold mb-10" data-toggle="modal" data-target=".bd-example-modal-lg-project-success" id="btnSuccessProject">Delete project</button>
+        <button class="btn btn-block btn-primary font-bold mb-10" data-toggle="modal" data-target=".bd-example-modal-lg-project-fail" id="btnFailProject">Delete project</button>
+      </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg-delete-project" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header" style="background: rgb(246, 0, 52);">
+            <h5 class="modal-title" id="exampleModalLabel">Delete student</h5>
+            <button type="button" class="close txt-light btnCloseModal" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body fz09" style="background: rgb(250, 250, 250);">
+            <div class="row">
+              <div class="col-xs-2 col-sm-2 col-md-2 text-center pt-10 pb-10 pr-0">
+                <!-- <i class="fas fa-info-circle fa-2x txt-gray"></i> -->
+                <i class="fas fa-exclamation-triangle fa-3x txt-gray"></i>
+              </div>
+              <div class="col-xs-10 col-sm-10 col-md-10">
+                <span class="txt-gray">Selected STUDENT ID : <span id="projectID"></span><br>(uid: <span id="studentUID"></span>)</span><br>
+                <span class="txt-gray">You are about to permanently delete this student and any associated info.</span>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" onclick="sis.confirm_delete_student()"><i class="fas fa-trash"></i> Delete</button>
+            <button type="button" class="btn btn-light"  data-dismiss="modal" aria-label="Close"> Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- .modal -->
+
+    <div class="modal fade bd-example-modal-lg-complaint-info" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header" style="background: #0d8deb;">
+            <h5 class="modal-title txt-light" id="exampleModalLabel">Complaint information</h5>
+            <button type="button" class="close txt-light btnCloseModal" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body fz09">
+            <div class="row">
+              <div class="col-sm-12 text-left">
+                <h3 id="comp_title">NA</h3>
+                <p id="comp_info">-</p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary btn-block"  data-dismiss="modal" aria-label="Close"> Close this window</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- .modal -->
+
+    <div class="modal fade bd-example-modal-lg-project-fail" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header" style="background: #ee0c50;">
+            <h5 class="modal-title txt-light" id="exampleModalLabel">Create project fail</h5>
+            <button type="button" class="close txt-light btnCloseModal" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body fz09">
+            <div class="row">
+              <div class="col-sm-12 text-center">
+                <i class="far fa-times-circle fa-5x text-danger"></i>
+                <div class="text-center" id="projectFailMsg">Can not create project</div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger btn-block"  data-dismiss="modal" aria-label="Close"> Close this window</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- .modal -->
+
+    <script type="text/javascript" src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="../../node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script type="text/javascript" src="../../node_modules/tooltip.js/dist/umd/tooltip.min.js"></script>
+    <script type="text/javascript" src="../../bower_components/utils-js/dist/utils.min.js"></script>
+
+
+    <script type="text/javascript" src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="../../assets/js/main.js"></script>
+    <script type="text/javascript" src="../../assets/js/function.js"></script>
+    <script type="text/javascript" src="../../node_modules/preload.js/dist/js/preload.js"></script>
+    <script type="text/javascript" src="../../assets/dist/js/authen.js"></script>
+    <script type="text/javascript" src="../../assets/dist/js/common.js"></script>
+    <script type="text/javascript" src="../../assets/dist/js/sis.js"></script>
+
+    <script type="text/javascript">
+
+      var start_row = 0
+      var limit_per_page = 10
+
+      $(document).ready(function(){
+        sis.load_complaint()
+      })
+      $(function(){
+        $('.npage').click(function(){
+          start_row += limit_per_page
+          sis.load_complaint()
+        })
+
+        $('.ppage').click(function(){
+          start_row -= limit_per_page
+          sis.load_complaint()
+        })
+      })
+    </script>
+  </body>
+</html>

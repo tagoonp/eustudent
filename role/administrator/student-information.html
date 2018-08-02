@@ -86,7 +86,8 @@
                   </div>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt mr-10"></i>Logout</a>
+                <a class="dropdown-item" href="changepassword.html"><i class="fas fa-key mr-10"></i>Change password</a>
+                <a class="dropdown-item" href="Javascript:authen.signout()"><i class="fas fa-sign-out-alt mr-10"></i>Logout</a>
               </div>
             </li>
           </ul>
@@ -120,6 +121,7 @@
               <div class="col-sm-12 pb-10">
                 <button class="btn btn-primary btn-outline" onclick="window.location = 'student-information.html'">Basic information</button>
                 <button class="btn btn-secondary btn-outline"onclick="window.location = 'study-information.html'">Study information</button>
+                <button class="btn btn-secondary btn-outline"onclick="window.location = 'study-chart.html'">Progress chart</button>
               </div>
             </div>
 
@@ -284,13 +286,13 @@
                             <div class="col-sm-4">
                               <div class="form-group">
                                 <label for="recipient-name" class="col-form-label font-bold fz08">THAI PID issue date</label>
-                                <input type="number" class="form-control" id="txtStartyear" placeholder="Enter start year ex. 2018" >
+                                <input type="date" class="form-control" id="txtStartyear" placeholder="Enter start year ex. 2018" >
                               </div>
                             </div>
                             <div class="col-sm-4">
                               <div class="form-group">
                                 <label for="message-text" class="col-form-label font-bold fz08">THAI PID expire date </label>
-                                <input type="number" class="form-control" id="txtStartyear" placeholder="Enter start year ex. 2018" >
+                                <input type="date" class="form-control" id="txtStartyear" placeholder="Enter start year ex. 2018" >
                               </div>
                             </div>
                           </div>
@@ -621,6 +623,7 @@
         console.log('Selected student -> ' + current_student);
         sis.load_prefix()
         sis.load_student_info()
+        sis.load_student_immigration_info()
 
         $('[data-toggle="tooltip"]').tooltip()
       })

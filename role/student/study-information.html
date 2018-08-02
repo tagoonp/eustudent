@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>SIS : Student</title>
+
+    <!-- Bootstrap -->
+    <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Fontawesom -->
+    <link href="../../bower_components/fontawesome/web-fonts-with-css/css/fontawesome-all.css" rel="stylesheet">
+    <!-- Preload -->
+    <link rel="stylesheet" href="../../node_modules/preload.js/dist/css/preload.css">
+
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <style media="screen">
+      body{
+        /* background: rgb(241, 241, 241); */
+      }
+
+      .navbar-light .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 1);
+      }
+
+      .navbar-light .navbar-nav .nav-link:hover {
+            color: rgba(255, 199, 0, 1);
+      }
+
+      .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+          color: rgba(255, 255, 255, 1);
+          font-weight: 500;
+      }
+    </style>
+
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: rgb(77, 90, 96) !important;">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand font-bold text-warning" href="#">
+          <img src="../../img/eu-sis-logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+          SIS
+        </a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item ">
+            <a href="index.html" class="nav-link">Personal Info.</a>
+          </li>
+          <li class="nav-item ">
+            <a href="study-information.html" class="nav-link active">Study info.</a>
+          </li>
+          <li class="nav-item ">
+            <a href="../../study-calendar.html" class="nav-link" target="_blank">Study calendar</a>
+          </li>
+          <!-- <li class="nav-item ">
+            <a href="postgrad-information.html" class="nav-link">Post graduate info.</a>
+          </li> -->
+        </ul>
+        <div class="form-inline my-2 my-lg-0">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0 text-warning">
+            <li class="nav-item dropdown text-warning">
+              <a class="nav-link dropdown-toggle text-warning" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="far fa-user-circle fa-2x text-warning"></i>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="left: -160px !important;">
+                <a class="dropdown-item" href="#">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="userName font-bold">Tagoon Prappre</div>
+                      <div class="userEmail fz08">wisnior.c@gmail.com</div>
+                      <!-- <button class="btn btn-md btn-block btn-primary mt-10">Account setting</button> -->
+                    </div>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="changepassword.html"><i class="fas fa-key mr-10"></i>Change password</a>
+                <a class="dropdown-item" href="Javascript:authen.signout()"><i class="fas fa-sign-out-alt mr-10"></i>Logout</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="main-panel" style=" padding-bottom: 30px; min-height: 200px; background: rgb(241, 241, 241);">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12 mt-20">
+
+            <div class="row">
+              <div class="col pt-10">
+
+                <div class="row">
+                  <div class="col font-bold pt-10">
+                    Scholarships
+                  </div>
+                </div>
+
+                <table class="table fz09 mt-5" style="border_: solid; border-width_: 1px; ">
+                  <tbody style="background: #fff;" class="table_response_scholarship txt-gray">
+                    <tr>
+                      <td>
+                        No Scholarships
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="col pt-10">
+
+                <div class="row">
+                  <div class="col font-bold pt-10">
+                    Advisor
+                  </div>
+
+                </div>
+
+                <table class="table fz09 mt-5" style="border_: solid; border-width_: 1px; ">
+                  <tbody style="background: #fff;" class="table_response_adv txt-gray">
+                    <tr>
+                      <td class="font-bold">No advisor information</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col font-bold pt-10">
+                Study Progress
+              </div>
+              <div class="col font-bold text-right">
+
+                <!-- sample modal content -->
+                <div class="modal fade bs-example-modal-lg-info-progress-1 text-left" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Manage proposal</h5>
+                        <button type="button" class="close txt-light btnCloseModal" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body fz09" style="background: rgb(250, 250, 250);">
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <span class="text-danger">** Please enter all required field.</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-body fz09">
+                        <form onsubmit="return false;" id="progress-form-1">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <div class="form-group dn">
+                                <label for="recipient-name" class="col-form-label font-bold fz08">ID <span class="text-danger">**</span></label>
+                                <input type="text" class="form-control" placeholder="Generate by system ..." id="txtE1id" readonly>
+                              </div>
+                            </div>
+                            <div class="col-sm-12">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label font-bold fz08">Proposal Title in English <span class="text-danger">**</span></label>
+                                <input type="text" class="form-control" placeholder="Enter proposal's title in English" id="txtP1TitleEn">
+                              </div>
+                            </div>
+                            <div class="col-sm-12">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label font-bold fz08">Proposal Title in Thai <span class="text-muted">(in any)</span></label>
+                                <input type="text" class="form-control" placeholder="Enter proposal's title in Thai" id="txtP1TitleTh">
+                              </div>
+                            </div>
+                            <div class="col-sm-12">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label font-bold fz08">Examination date <span class="text-danger">**</span></label>
+                                <input type="date" class="form-control" placeholder="Choose exam date" id="txtP1Date">
+                              </div>
+                            </div>
+                            <div class="col-sm-12">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label font-bold fz08">Description/Remark</label>
+                                <textarea name="txtP1Desc" id="txtP1Desc" class="form-control" rows="4" cols="80"></textarea>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+                        <button type="button" class="btn btn-primary" onclick="sis.save_progress_1()">Save</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.modal -->
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-12 pt-10">
+                <table class="table fz09" style="border_: solid; border-width_: 1px; ">
+                  <tbody style="background: #fff;" class="table_response txt-gray">
+                    <tr>
+                      <td colspan="4" class="font-bold txt-light" style="background: #4f5f78;">
+                        <div class="row">
+                          <div class="col"><h5>Proposal Examination</h5></div>
+                          <div class="col text-right dn">
+                            <button class="btn btn-light btn-square" data-toggle="modal" data-target=".bs-example-modal-lg-info-progress-1"><i class="fas fa-plus"></i></button>
+                            <button class="btn btn-light btn-square" data-toggle="tooltip" data-placement="top" title="Make this progress pass" onclick="sis.setProgressPass(1)"><i class="fas fa-check"></i></button>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="4">
+                        <div id="progress_1">No proposal information.</div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <!-- EC -->
+                <div class="row">
+                  <div class="col font-bold text-right">
+                    <!-- sample modal content -->
+                    <div class="modal fade bs-example-modal-lg-info-progress-2 text-left" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">E.C. management</h5>
+                            <button type="button" class="close txt-light btnCloseModal" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body fz09" style="background: rgb(250, 250, 250);">
+                            <div class="row">
+                              <div class="col-sm-12">
+                                <span class="text-danger">** Please enter all required field.</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-body fz09">
+                            <form onsubmit="return false;" id="progress-form-1">
+                              <div class="row">
+                                <div class="col-sm-6">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">REC. <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter REC. code example : 61-002-08-1" id="txtP2REC">
+                                  </div>
+                                </div>
+                                <div class="col-sm-6">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Type. <span class="text-danger">**</span></label>
+                                    <select class="form-control" name="txtP2Type" id="txtP2Type">
+                                      <option value="">-- Choose type of E.C. --</option>
+                                      <option value="Proposal Exam">for P.E.</option>
+                                      <option value="Qualification Exam">for Q.E.</option>
+                                    </select>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                  <div class="form-group dn">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">ID <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Generate by system ..." id="txtE2id" readonly>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Title <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter title" id="txtP2TitleEn">
+                                  </div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Approval date <span class="text-danger">**</span></label>
+                                    <input type="date" class="form-control" placeholder="Choose exam date" id="txtP2Date">
+                                  </div>
+                                </div>
+<!--
+                                <div class="col-sm-6 pt-30">
+                                  <div class="form-group">
+                                    <input type="checkbox" id="ec_notify_1" name="ec_notify_1" value="1"> Notify progress report to all relate person<br>
+                                    <input type="checkbox" id="ec_notify_2" name="ec_notify_2" value="1"> Notify expiration  to all relate person
+                                  </div>
+                                </div> -->
+
+                                <div class="col-sm-12">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Description/Remark</label>
+                                    <textarea name="txtP1Desc" id="txtP2Desc" class="form-control" rows="4" cols="80"></textarea>
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+                            <button type="button" class="btn btn-primary" onclick="sis.save_progress_2()">Save</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.modal -->
+                  </div>
+                </div>
+
+                <table class="table fz09 mt-5" style="border_: solid; border-width_: 1px; ">
+                  <tbody style="background: #fff;" class="table_response txt-gray">
+                    <tr>
+                      <td colspan="4" class="font-bold txt-light" style="background: #4f5f78;">
+                        <div class="row">
+                          <div class="col"><h5>Ethic approval info.</h5></div>
+                          <div class="col text-right dn">
+                            <div id="progress_2_btn">
+                              <button class="btn btn-light btn-square" data-toggle="modal" data-target=".bs-example-modal-lg-info-progress-2"><i class="fas fa-plus"></i></button>
+                              <button class="btn btn-light btn-square" data-toggle="tooltip" data-placement="top" title="Make this progress pass" onclick="sis.setProgressPass(2)"><i class="fas fa-check"></i></button>
+                              <button class="btn btn-danger btn-square" data-toggle="tooltip" data-placement="top" title="Make this to un-monitor" onclick="sis.setProgressUncjeck(2)"><i class="fas fa-times"></i></button>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="4">
+                        <div id="progress_2">No E.C. approval information.</div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- EC -->
+
+
+
+                <!-- Qualification -->
+                <div class="row">
+                  <div class="col font-bold text-right">
+                    <!-- sample modal content -->
+                    <div class="modal fade bs-example-modal-lg-info-progress-3 text-left" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Qualification examination</h5>
+                            <button type="button" class="close txt-light btnCloseModal" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body fz09" style="background: rgb(250, 250, 250);">
+                            <div class="row">
+                              <div class="col-sm-12">
+                                <span class="text-danger">** Please enter all required field.</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-body fz09">
+                            <form onsubmit="return false;" id="progress-form-1">
+                              <div class="row">
+                                <div class="col-sm-12">
+                                  <div class="form-group dn">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">ID <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Generate by system ..." id="txtE3id" readonly>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Title <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter title ..." id="txtP3TitleEn">
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Examination date <span class="text-danger">**</span></label>
+                                    <input type="date" class="form-control" placeholder="Choose exam date" id="txtP3Date">
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Description/Remark</label>
+                                    <textarea name="txtP1Desc" id="txtP3Desc" class="form-control" rows="4" cols="80"></textarea>
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+                            <button type="button" class="btn btn-primary" onclick="sis.save_progress_3()">Save</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.modal -->
+                  </div>
+                </div>
+
+                <table class="table fz09 mt-5" style="border_: solid; border-width_: 1px; ">
+                  <tbody style="background: #fff;" class="table_response txt-gray">
+                    <tr>
+                      <td colspan="4" class="font-bold txt-light" style="background: #4f5f78;">
+                        <div class="row">
+                          <div class="col"><h5>Qualification examination</h5></div>
+                          <div class="col text-right dn">
+                            <div id="progress_3_btn">
+                              <button class="btn btn-light btn-square" data-toggle="modal" data-target=".bs-example-modal-lg-info-progress-3"><i class="fas fa-plus"></i></button>
+                              <button class="btn btn-light btn-square" data-toggle="tooltip" data-placement="top" title="Make this progress pass" onclick="sis.setProgressPass(3)"><i class="fas fa-check"></i></button>
+                              <button class="btn btn-danger btn-square" data-toggle="tooltip" data-placement="top" title="Make this to un-monitor" onclick="sis.setProgressUncjeck(3)"><i class="fas fa-times"></i></button>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="4">
+                        <div id="progress_3">No qualification examination information.</div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- Qualification -->
+
+                <!-- Thesis -->
+                <div class="row">
+                  <div class="col font-bold text-right">
+                    <!-- sample modal content -->
+                    <div class="modal fade bs-example-modal-lg-info-progress-4 text-left" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Manage thesis</h5>
+                            <button type="button" class="close txt-light btnCloseModal" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body fz09" style="background: rgb(250, 250, 250);">
+                            <div class="row">
+                              <div class="col-sm-12">
+                                <span class="text-danger">** Please enter all required field.</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-body fz09">
+                            <form onsubmit="return false;" id="progress-form-1">
+                              <div class="row">
+                                <div class="col-sm-12">
+                                  <div class="form-group dn">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">ID <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Generate by system ..." id="txtE4id" readonly>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Thesis Title in English<span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter thesis's title in English" id="txtP4TitleEn">
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Thesis Title in Thai <span class="text-muted">(in any)</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter thesis's title in Thai" id="txtP4TitleTh">
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Examination date <span class="text-danger">**</span></label>
+                                    <input type="date" class="form-control" placeholder="Choose examination date" id="txtP4Date">
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Description/Remark</label>
+                                    <textarea name="txtP4Desc" id="txtP4Desc" class="form-control" rows="4" cols="80"></textarea>
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+                            <button type="button" class="btn btn-primary" onclick="sis.save_progress_4()">Save</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.modal -->
+                  </div>
+                </div>
+
+                <table class="table fz09 mt-5" style="border_: solid; border-width_: 1px; ">
+                  <tbody style="background: #fff;" class="table_response txt-gray">
+                    <tr>
+                      <td colspan="4" class="font-bold txt-light" style="background: #4f5f78;">
+                        <div class="row">
+                          <div class="col"><h5>Thesis Examination</h5></div>
+                          <div class="col text-right dn">
+                            <button class="btn btn-light btn-square" data-toggle="modal" data-target=".bs-example-modal-lg-info-progress-4"><i class="fas fa-plus"></i></button>
+                            <button class="btn btn-light btn-square" data-toggle="tooltip" data-placement="top" title="Make this progress pass" onclick="sis.setProgressPass(4)"><i class="fas fa-check"></i></button>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="4">
+                        <div id="progress_4">No thesis information.</div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- Thesis -->
+
+                <!-- Complihensive -->
+                <div class="row">
+                  <div class="col font-bold text-right">
+                    <!-- sample modal content -->
+                    <div class="modal fade bs-example-modal-lg-info-progress-5 text-left" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Manage comprehensive</h5>
+                            <button type="button" class="close txt-light btnCloseModal" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body fz09" style="background: rgb(250, 250, 250);">
+                            <div class="row">
+                              <div class="col-sm-12">
+                                <span class="text-danger">** Please enter all required field.</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-body fz09">
+                            <form onsubmit="return false;" id="progress-form-1">
+                              <div class="row">
+                                <div class="col-sm-12">
+                                  <div class="form-group dn">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">ID <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Generate by system ..." id="txtE5id" readonly>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Examination date <span class="text-danger">**</span></label>
+                                    <input type="date" class="form-control" placeholder="Choose examination date" id="txtP5Date">
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Description/Remark <span class="text-danger">**</span></label>
+                                    <textarea name="txtP4Desc" id="txtP5Desc" class="form-control" rows="4" cols="80"></textarea>
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+                            <button type="button" class="btn btn-primary" onclick="sis.save_progress_5()">Save</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.modal -->
+                  </div>
+                </div>
+
+                <table class="table fz09 mt-5" style="border_: solid; border-width_: 1px; ">
+                  <tbody style="background: #fff;" class="table_response txt-gray">
+                    <tr>
+                      <td colspan="4" class="font-bold txt-light" style="background: #4f5f78;">
+                        <div class="row">
+                          <div class="col"><h5>Comprehensive</h5></div>
+                          <div class="col text-right dn">
+                            <div id="progress_5_btn">
+                              <button class="btn btn-light btn-square" data-toggle="modal" data-target=".bs-example-modal-lg-info-progress-5"><i class="fas fa-plus"></i></button>
+                              <button class="btn btn-light btn-square" data-toggle="tooltip" data-placement="top" title="Make this progress pass" onclick="sis.setProgressPass(5)"><i class="fas fa-check"></i></button>
+                              <button class="btn btn-danger btn-square" data-toggle="tooltip" data-placement="top" title="Make this to un-monitor" onclick="sis.setProgressUncjeck(5)"><i class="fas fa-times"></i></button>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="4">
+                        <div id="progress_5">No complehensive information.</div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- Complihensive -->
+
+                <!-- Publication -->
+                <div class="row">
+                  <div class="col font-bold text-right">
+                    <!-- sample modal content -->
+                    <div class="modal fade bs-example-modal-lg-info-progress-6 text-left" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Manage pulications</h5>
+                            <button type="button" class="close txt-light btnCloseModal" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body fz09" style="background: rgb(250, 250, 250);">
+                            <div class="row">
+                              <div class="col-sm-12">
+                                <span class="text-danger">** Please enter all required field.</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-body fz09">
+                            <form onsubmit="return false;" id="progress-form-6">
+                              <div class="row">
+                                <div class="col-sm-12">
+                                  <div class="form-group dn">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">ID <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Generate by system ..." id="txtE6id" readonly>
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Publication Title <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter publication title" id="txtP6Title">
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Publisher <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter publisher's name" id="txtP6Publisher">
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Accept date <span class="text-danger">**</span></label>
+                                    <input type="date" class="form-control" placeholder="Choose accept date" id="txtP6Date">
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Description/Remark</label>
+                                    <textarea name="txtP4Desc" id="txtP6Desc" class="form-control" rows="4" cols="80"></textarea>
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+                            <button type="button" class="btn btn-primary" onclick="sis.save_progress_6()">Save</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.modal -->
+                  </div>
+                </div>
+
+                <table class="table fz09 mt-5" style="border_: solid; border-width_: 1px; ">
+                  <tbody style="background: #fff;" class="table_response txt-gray">
+                    <tr>
+                      <td colspan="4" class="font-bold txt-light" style="background: #4f5f78;">
+                        <div class="row">
+                          <div class="col"><h5>Publications</h5></div>
+                          <div class="col text-right dn">
+                            <button class="btn btn-light btn-square" data-toggle="modal" data-target=".bs-example-modal-lg-info-progress-6"><i class="fas fa-plus"></i></button>
+                            <button class="btn btn-light btn-square" data-toggle="tooltip" data-placement="top" title="Make this progress pass" onclick="sis.setProgressPass(6)"><i class="fas fa-check"></i></button>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="4">
+                        <div id="progress_6">No publication.</div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- Publication -->
+
+                <!-- English -->
+                <div class="row">
+                  <div class="col font-bold text-right">
+                    <!-- sample modal content -->
+                    <div class="modal fade bs-example-modal-lg-info-progress-english text-left" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">English score</h5>
+                            <button type="button" class="close txt-light btnCloseModal" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body fz09" style="background: rgb(250, 250, 250);">
+                            <div class="row">
+                              <div class="col-sm-12">
+                                <span class="text-danger">** Please enter all required field.</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-body fz09">
+                            <form onsubmit="return false;" id="register-staff-form">
+                              <div class="row">
+                                <div class="col-sm-12">
+                                  <div class="form-group dn">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Score <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter english score ..." id="txtE7id">
+                                  </div>
+                                </div>
+                                <div class="col-sm-6">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Score <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter english score ..." id="txtP7Score">
+                                  </div>
+                                </div>
+                                <div class="col-sm-6">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">Examination name <span class="text-danger">**</span></label>
+                                    <input type="text" class="form-control" placeholder="Enter institution or test name ..." id="txtP7Name">
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                  <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label font-bold fz08">More description </label>
+                                    <textarea class="form-control" placeholder="Enter description ..." id="txtP7Desc"></textarea>
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
+                            <button type="button" class="btn btn-primary" onclick="sis.save_progress_7()">Save</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /.modal -->
+                  </div>
+                </div>
+
+                <table class="table fz09 mt-5" style="border_: solid; border-width_: 1px; ">
+                  <tbody style="background: #fff;" class="table_response txt-gray">
+                    <tr>
+                      <td colspan="2" class="font-bold txt-light" style="background: #4f5f78;">
+                        <div class="row">
+                          <div class="col"><h5>English Examination</h5></div>
+                          <div class="col text-right dn">
+                            <button class="btn btn-light btn-square" data-toggle="modal" data-target=".bs-example-modal-lg-info-progress-english"><i class="fas fa-plus"></i></button>
+                            <button class="btn btn-light btn-square" data-toggle="tooltip" data-placement="top" title="Make this progress pass" onclick="sis.setProgressPass(7)"><i class="fas fa-check"></i></button>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody id="progress_7">
+                    <tr>
+                      <td colspan="2">
+                        No record found
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- English -->
+
+              </div>
+            </div>
+
+
+
+
+
+          </div>
+          <!-- .col-md-9 -->
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg-delete-project" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header" style="background: rgb(246, 0, 52);">
+            <h5 class="modal-title" id="exampleModalLabel">Delete student</h5>
+            <button type="button" class="close txt-light btnCloseModal" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body fz09" style="background: rgb(250, 250, 250);">
+            <div class="row">
+              <div class="col-xs-2 col-sm-2 col-md-2 text-center pt-10 pb-10 pr-0">
+                <!-- <i class="fas fa-info-circle fa-2x txt-gray"></i> -->
+                <i class="fas fa-exclamation-triangle fa-3x txt-gray"></i>
+              </div>
+              <div class="col-xs-10 col-sm-10 col-md-10">
+                <span class="txt-gray">Selected STUDENT ID : <span id="projectID"></span><br>(uid: <span id="studentUID"></span>)</span><br>
+                <span class="txt-gray">You are about to permanently delete this student and any associated info.</span>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" onclick="sis.confirm_delete_student()"><i class="fas fa-trash"></i> Delete</button>
+            <button type="button" class="btn btn-light"  data-dismiss="modal" aria-label="Close"> Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- .modal -->
+
+    <div class="modal fade bd-example-modal-lg-project-success" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header" style="background: #fff;">
+            <h5 class="modal-title txt-dark" id="exampleModalLabel">Create project success</h5>
+            <button type="button" class="close txt-light btnCloseModal" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body fz09">
+            <div class="row">
+              <div class="col-sm-12 text-center">
+                <i class="far fa-check-circle fa-5x text-success"></i>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary btn-block"  data-dismiss="modal" aria-label="Close"> Close this window</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- .modal -->
+
+    <div class="modal fade bd-example-modal-lg-project-fail" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header" style="background: #ee0c50;">
+            <h5 class="modal-title txt-light" id="exampleModalLabel">Create project fail</h5>
+            <button type="button" class="close txt-light btnCloseModal" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body fz09">
+            <div class="row">
+              <div class="col-sm-12 text-center">
+                <i class="far fa-times-circle fa-5x text-danger"></i>
+                <div class="text-center" id="projectFailMsg">Can not create project</div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger btn-block"  data-dismiss="modal" aria-label="Close"> Close this window</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- .modal -->
+
+    <script type="text/javascript" src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="../../node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script type="text/javascript" src="../../node_modules/tooltip.js/dist/umd/tooltip.min.js"></script>
+    <script type="text/javascript" src="../../bower_components/utils-js/dist/utils.min.js"></script>
+
+
+    <script type="text/javascript" src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="../../assets/js/main.js"></script>
+    <script type="text/javascript" src="../../assets/js/function.js"></script>
+    <script type="text/javascript" src="../../node_modules/preload.js/dist/js/preload.js"></script>
+    <script type="text/javascript" src="../../assets/dist/js/authen.js"></script>
+    <script type="text/javascript" src="../../assets/dist/js/common.js"></script>
+    <script type="text/javascript" src="../../assets/dist/js/sis.js"></script>
+
+    <script type="text/javascript">
+
+    var current_student = window.localStorage.getItem(local_prefix + 'uid')
+
+      $(document).ready(function(){
+
+        if(current_student == null){
+          window.location = 'student.html'
+        }
+
+        authen.check_user_info()
+
+        console.log('Selected student -> ' + current_student);
+        sis.load_prefix()
+        sis.load_student_info()
+        sis.load_advisor_list()
+        sis.load_student_advisor_list()
+        sis.load_student_sholar_list()
+        sis.check_progress_all()
+        sis.load_progress(1)
+        sis.load_progress(2)
+        sis.load_progress(3)
+        sis.load_progress(4)
+        sis.load_progress(5)
+        sis.load_progress(6)
+        sis.load_progress(7)
+
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+      $(function(){
+
+      })
+    </script>
+  </body>
+</html>

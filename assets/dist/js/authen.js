@@ -1,15 +1,31 @@
 var authen = {
+  check_user_info: function(){
+    var param = {
+      id: current_user,
+      role: current_role
+    }
+    console.log(param);
+    return ;
+  },
   check_user: function(current_role){
     var param = {
         uid: current_user,
-        role: current_role,
+        role: current_role
     }
 
-    console.log(param);
+    var jxr = $.post(ws_url + 'checkuser.php', param, function(){}, 'json')
+               .always(function(snap){
+                 if(fnc.checksnap(snap)){
+                   snap.forEach(function(i){
+                     $('.userName').text(i.fname + ' ' + i.lname)
+                     $('.userEmail').text(i.email)
+                   })
+                 }
+               })
     return true;
   },
   signout: function(){
-    window.location = '../../login.html'
+    window.location = '../../index.html'
   },
   create_account: function(){
 
@@ -77,6 +93,7 @@ var authen = {
 
     var jxr = $.post(ws_url + 'checklogin.php', param, function(){}, 'json')
                .always(function(snap){
+                 console.log(snap);
                  if(fnc.checksnap(snap)){
                    snap.forEach(function(i){
                      window.localStorage.setItem(local_prefix + 'uid', i.uid)
@@ -84,13 +101,14 @@ var authen = {
                      window.location = './role/' + i.role + '/'
                    })
                  }else{
-                   console.log(snap);
+                   alert('Invalid user account')
                    preload.hide()
                  }
                })
-               .fail(function(){
-                 preload.hide()
-               })
+               // .fail(function(){
+               //   alert('Can not connect database')
+               //   preload.hide()
+               // })
 
 
   },

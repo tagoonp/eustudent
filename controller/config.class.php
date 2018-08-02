@@ -6,7 +6,8 @@ date_default_timezone_set("Asia/Bangkok");
 
 $host = 'localhost';
 $user = 'root';
-$password = 'na20v^U+';
+// $password = 'na20v^U+';
+$password = 'mandymorenn';
 $dbname = 'eusis';
 $dbprefix = 'eusis_';
 

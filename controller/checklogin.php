@@ -24,8 +24,7 @@ $tb2 = $dbprefix."userinfo";
 
 $strSQL = "SELECT * FROM $tb1 a INNER JOIN $tb2 b ON a.uid = b.info_uid
            WHERE
-            ((a.email = '$email' AND a.password = '$password')
-            OR (a.username = '$email' AND a.password = '$password'))
+            ((a.email = '$email' AND a.password = '$password') OR (a.username = '$email' AND a.password = '$password'))
             AND a.use_status = '1'
             AND a.active_status = '1'
             AND a.allow_status = '1'
