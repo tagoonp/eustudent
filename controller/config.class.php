@@ -2,14 +2,11 @@
 header("Access-Control-Allow-Origin: *");
 date_default_timezone_set("Asia/Bangkok");
 
-// die();
-
-$host = 'localhost';
-$user = 'root';
-// $password = 'na20v^U+';
-$password = 'mandymorenn';
-$dbname = 'eusis';
-$dbprefix = 'eusis_';
+$host = '';
+$user = '';
+$password = '';
+$dbname = '';
+$dbprefix = '';
 
 $conn = mysqli_connect($host, $user, $password, $dbname);
 
